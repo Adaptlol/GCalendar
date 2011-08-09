@@ -52,7 +52,7 @@ $calsSources = "		eventSources: [\n";
 foreach($allCalendars as $calendar) {
 	$cssClass = "gcal-event_gccal_".$calendar->id;
 	$color = GCalendarUtil::getFadedColor($calendar->color);
-	$document->addStyleDeclaration(".".$cssClass.",.fc-agenda ".$cssClass." .fc-event-time, .".$cssClass." a, .".$cssClass." span{background-color: ".$color." !important; border-color: #".$calendar->color."; color: white;}");
+	$document->addStyleDeclaration(".".$cssClass.",.fc-agenda ".$cssClass." .fc-event-time, .".$cssClass." a, .".$cssClass." div{background-color: ".$color." !important; border-color: #".$calendar->color."; color: white;}");
 	if(empty($calendarids) || in_array($calendar->id, $calendarids)){
 		$value = html_entity_decode(JRoute::_('index.php?option=com_gcalendar&view=jsonfeed&format=raw&gcid='.$calendar->id));
 		$calsSources .= "				'".$value."',\n";
@@ -141,16 +141,16 @@ $calCode .= "			week: \"".$params->get('timeformat_week', "HH:mm{ - HH:mm}")."\"
 $calCode .= "			day: '".$params->get('timeformat_day', 'HH:mm{ - HH:mm}')."'},\n";
 $calCode .= "			columnFormat: { month: 'ddd', week: 'ddd d', day: 'dddd d'},\n";
 $calCode .= "			axisFormat: '".$params->get('axisformat', 'HH:mm')."',\n";
-$calCode .= "			allDayText: '".JText::_( 'CALENDAR_VIEW_ALL_DAY' )."',\n";
+$calCode .= "			allDayText: '".JText::_( 'COM_GCALENDAR_GCALENDAR_VIEW_ALL_DAY' )."',\n";
 $calCode .= "			buttonText: {\n";
 $calCode .= "			prev:     '&nbsp;&#9668;&nbsp;',\n";  // left triangle
 $calCode .= "			next:     '&nbsp;&#9658;&nbsp;',\n";  // right triangle
 $calCode .= "			prevYear: '&nbsp;&lt;&lt;&nbsp;',\n"; // <<
 $calCode .= "			nextYear: '&nbsp;&gt;&gt;&nbsp;',\n"; // >>
-$calCode .= "			today:    '".JText::_( 'TOOLBAR_TODAY' )."',\n";
-$calCode .= "			month:    '".JText::_( 'VIEW_MONTH' )."',\n";
-$calCode .= "			week:     '".JText::_( 'VIEW_WEEK' )."',\n";
-$calCode .= "			day:      '".JText::_( 'VIEW_DAY' )."'\n";
+$calCode .= "			today:    '".JText::_( 'COM_GCALENDAR_GCALENDAR_VIEW_TOOLBAR_TODAY' )."',\n";
+$calCode .= "			month:    '".JText::_( 'COM_GCALENDAR_GCALENDAR_VIEW_VIEW_MONTH' )."',\n";
+$calCode .= "			week:     '".JText::_( 'COM_GCALENDAR_GCALENDAR_VIEW_VIEW_WEEK' )."',\n";
+$calCode .= "			day:      '".JText::_( 'COM_GCALENDAR_GCALENDAR_VIEW_VIEW_DAY' )."'\n";
 $calCode .= "		},\n";
 $calCode .= $calsSources;
 $calCode .= "		viewDisplay: function(view) {\n";
@@ -204,20 +204,18 @@ $calCode .= "			}\n";
 $calCode .= "		}\n";
 $calCode .= "	});\n";
 $class = empty($theme)?'fc':'ui';
-$calCode .= "	var custom_buttons ='<td style=\"padding-left:10px\">'+\n";
-$calCode .= "			'<div class=\"fc-button-datepicker ".$class."-state-default ".$class."-corner-left ".$class."-corner-right\">'+\n";
+$calCode .= "	var custom_buttons = '<span class=\"fc-button fc-button-datepicker ".$class."-state-default ".$class."-corner-left ".$class."-corner-right\">'+\n";
+$calCode .= "			'<span class=\"fc-button-inner\"><span class=\"fc-button-content\">'+\n";
 $calCode .= "			'<input type=\"hidden\" id=\"gcalendar_component_date_picker\" value=\"\">'+\n";
-$calCode .= "			'<a onClick=\"jQuery(\'#gcalendar_component_date_picker\').datepicker(\'show\');\"><span>".JText::_('SHOW_DATEPICKER')."'+\n";
+$calCode .= "			'<a onClick=\"jQuery(\'#gcalendar_component_date_picker\').datepicker(\'show\');\"><span>".JText::_('COM_GCALENDAR_GCALENDAR_VIEW_SHOW_DATEPICKER')."'+\n";
 $calCode .= "			'</span></a>'+\n";
-$calCode .= "			'</div>'+\n";
-$calCode .= "			'</td>';\n";
-$calCode .= "		custom_buttons +='<td style=\"padding-left:10px\">'+\n";
-$calCode .= "			'<div class=\"fc-button-print ".$class."-state-default ".$class."-corner-left ".$class."-corner-right\">'+\n";
-$calCode .= "			'<a onClick=\"print_view();\"><span class=\"".$class."-icon ".$class."-icon-print\">".JText::_('TOOLBAR_PRINT')."'+\n";
+$calCode .= "			'</span></span></span>';\n";
+$calCode .= "		custom_buttons +='<span class=\"fc-button fc-button-print ".$class."-state-default ".$class."-corner-left ".$class."-corner-right\">'+\n";
+$calCode .= "			'<span class=\"fc-button-inner\"><span class=\"fc-button-content\">'+\n";
+$calCode .= "			'<a onClick=\"print_view();\"><span class=\"".$class."-icon ".$class."-icon-print\">".JText::_('COM_GCALENDAR_GCALENDAR_VIEW_TOOLBAR_PRINT')."'+\n";
 $calCode .= "			'</span></a>'+\n";
-$calCode .= "			'</div>'+\n";
-$calCode .= "			'</td>';\n";
-$calCode .= "	jQuery('div.fc-button-today').parent('td').after(custom_buttons);\n";
+$calCode .= "			'</span></span></span>';\n";
+$calCode .= "	jQuery('span.fc-button-today').after(custom_buttons);\n";
 $calCode .= "	if (jQuery('table').disableSelection) jQuery('div.fc-button-today').closest('table.fc-header').disableSelection();\n";
 $calCode .= "	jQuery('div.fc-button-datepicker, div.fc-button-print')\n";
 $calCode .= "		.mousedown( function(){ $(this).addClass('$class-state-down'); })\n";
@@ -283,7 +281,7 @@ if($params->get('show_selection', 1) == 1){
 	echo $calendar_list;
 	echo "<div align=\"center\" style=\"text-align:center\">\n";
 	echo "<a id=\"gc_gcalendar_view_toggle\" name=\"gc_gcalendar_view_toggle\" href=\"#\">\n";
-	echo "<img id=\"gc_gcalendar_view_toggle_status\" name=\"gc_gcalendar_view_toggle_status\" src=\"".JURI::base()."media/com_gcalendar/images/down.png\" alt=\"".JText::_('CALENDAR_LIST')."\" title=\"".JText::_('CALENDAR_LIST')."\"/>\n";
+	echo "<img id=\"gc_gcalendar_view_toggle_status\" name=\"gc_gcalendar_view_toggle_status\" src=\"".JURI::base()."media/com_gcalendar/images/down.png\" alt=\"".JText::_('COM_GCALENDAR_GCALENDAR_VIEW_CALENDAR_LIST')."\" title=\"".JText::_('COM_GCALENDAR_GCALENDAR_VIEW_CALENDAR_LIST')."\"/>\n";
 	echo "</a></div>\n";
 }
 
@@ -293,27 +291,18 @@ echo $params->get( 'textafter' );
 echo "<div style=\"text-align:center;margin-top:10px\" id=\"gcalendar_powered\"><a href=\"http://g4j.laoneo.net\">Powered by GCalendar</a></div>\n";
 
 //hide buttons and tune CSS for printable format
-if (@ $_GET['tmpl'] == 'component')
-echo '
-<style type="text/css">
-body { zoom:100%; width:1200px; margin-top:0px;}
-.fc-header-left, .fc-header-right { display:none; }
-table.fc-header   { margin:0; }
-.fc-header-title  { margin:0 5px; }
-
-/*CSS3 for the future*/
-@page {size: A4 landscape;}
-</style>
-'; else echo '
-<script type="text/javascript">
-function print_view() {
-	var loc=document.location.href.replace(/\?/,"\?tmpl=component\&");
-	if (loc==document.location.href)
-		loc=document.location.href.replace(/#/,"\?tmpl=component#");
-	var printWindow = window.open(loc);
-	printWindow.focus();
+if (JRequest::getVar('tmpl') == 'component'){
+	$document->addStyleSheet(JURI::base().'components/com_gcalendar/libraries/fullcalendar/fullcalendar.print.css', 'text/css', 'print');
+	$document->addStyleDeclaration('.fc-header-left, .fc-header-right { display:none; }');
+	$document->addStyleDeclaration('@page {size: A4 landscape;}');
+} else { 
+	$document->addStyleDeclaration('@page {size: A4 landscape;}');
+	$document->addScriptDeclaration('function print_view() {
+					var loc=document.location.href.replace(/\?/,"\?tmpl=component\&");
+					if (loc==document.location.href)
+						loc=document.location.href.replace(/#/,"\?tmpl=component#");
+					var printWindow = window.open(loc);
+					printWindow.focus();
+				}');
 }
-</script>
-<!--<a id="printlink" href="#" onclick="print_view();return false;">Print friendly version</a>-->
-';
 ?>

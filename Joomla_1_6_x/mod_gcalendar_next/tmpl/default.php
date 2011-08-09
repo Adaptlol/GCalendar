@@ -64,7 +64,7 @@ $document =& JFactory::getDocument();
 $calCode = "// <![CDATA[ \n";
 $calCode .= "	jQuery(document).ready(function() {\n";
 $calCode .= "	var targetDate; \n";
-$calCode .= "	targetDate = new Date(\"".date("D,d M Y H:i:s", $targetDate)."\");\n";
+$calCode .= "	targetDate = new Date(\"".GCalendarUtil::formatDate("D,d M Y H:i:s", $targetDate)."\");\n";
 $calCode .= "	jQuery('#".$objid."').countdown({until: targetDate, \n";
 $calCode .= "				       description: '".str_replace('\'', '\\\'', $gcalendar_item->get_title())."', \n";
 $calCode .= " 				       layout: '".$layout."', \n";
@@ -73,6 +73,6 @@ $calCode .= "});\n";
 $calCode .= "// ]]>\n";
 $document->addScriptDeclaration($calCode);
 
-echo "<div id=\"".$objid."\" class=\"".$class."\">you have javascript disabled</div>\n";
+echo "<div id=\"".$objid."\" class=\"".$class."\">". JText::_("MOD_GCALENDAR_NEXT_JSERR") . "</div>\n";
 echo "</div>\n";
 ?>

@@ -1,6 +1,7 @@
 div.gc_up_mod_img {
 	float: left !important;
 	margin-right: 6px !important;
+	margin-bottom: 20px;
 	width: 42px !important;
 	height: 42px !important;
 	background-image:
@@ -20,7 +21,7 @@ div.gc_up_mod_month_text {
 	font-size: 10px !important;
 	text-align: center !important;
 	position: relative !important;
-	margin-top: -15px !important;
+	margin-top: -13px !important;
 	margin-bottom: -4px !important;
 }
 

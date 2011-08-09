@@ -27,6 +27,8 @@ jimport( 'joomla.html.parameter' );
 
 require_once (JPATH_SITE.DS.'components'.DS.'com_gcalendar'.DS.'libraries'.DS.'nextevents'.DS.'nextevents.php');
 
+require_once (JPATH_ADMINISTRATOR.DS.'components'.DS.'com_gcalendar'.DS.'util.php');
+
 /**
  * Constructor
  *
@@ -49,7 +51,7 @@ class plgContentgcalendar_next extends JPlugin {
 		if (JRequest::getCmd('option') != 'com_content') return;
 		if (!$article->text) return;
 
-		$text = preg_replace_callback('/{gcalnext\s+(.*?)\s*}/', array($this, 'embedEvent'), $article->text);
+		$text = preg_replace_callback('/{gcalnext\s+(.*?)\s*?}(.*?){\/gcalnext}/', array($this, 'embedEvent'), $article->text);
 
 		if ($text) {
 			$article->text = $text;
@@ -57,15 +59,42 @@ class plgContentgcalendar_next extends JPlugin {
 	}
 
 	function embedEvent($gcalnext) {
-		$embedded_str = $gcalnext[1];
+		$param_str = $gcalnext[1];
+		$fmt_str = $gcalnext[2];
 
-		$helper = new GCalendarKeywordsHelper($this->params, $embedded_str);
+		$helper = new GCalendarKeywordsHelper($this->params, $param_str, $fmt_str);
 
 		if (!$helper->event()) {
 			return $helper->params->get('no_event');
 		}
 
-		return $helper->replace();
+		$start = $helper->event()->get_start_date();
+		$end = $helper->event()->get_end_date();
+		$now = time();
+		$start_soon = date($this->params->get('start_soon', '-4 hours'), $start);
+		$end_soon = date($this->params->get('end_soon', '-2 hours'), $end);
+		$text = '';
+
+		if ($fmt_str) {
+			$this->params->set('output', $fmt_str);
+		}
+
+		if ($end <= $now) { // AND it hasn't ended
+			if ($start >= $now) { // If it has started
+				$text = $this->params->get('output_now');
+			}
+			elseif ($start_soon >= $now) {
+				$text = $this->params->get('output_start_soon', JText::_('PLG_GCALENDAR_NEXT_OUTPUT_STARTING_SOON'));
+			}
+			elseif ($end_soon >= $now ) {
+				$text = $this->params->get('output_end_soon', JText::_('PLG_GCALENDAR_NEXT_OUTPUT_ENDING_SOON')); }
+		}
+
+		if ($text == "" or $text == null) {
+			$text = $this->params->get('output');
+		}
+
+		return $helper->replace($text);
 	}
 }
 
@@ -73,30 +102,24 @@ class PluginKeywordsHelper {
 
 	var $params;
 	var $argre;
-	var $plgText;
+	var $txtParam;
+	var $txtFmt;
 	var $dataobj;
 	var $plgParams = Array();
-	var $fmtParams = Array();
 
-	function PluginKeywordsHelper($params, $plgText, $argre = '/(?:\[\$)\s*(.*?)\s*(?:\$\])/') {
+	function PluginKeywordsHelper($params, $txtParam, $txtFmt, $argre = '/(?:\[\$)\s*(.*?)\s*(?:\$\])/') {
 		$this->params = new JParameter($params->toString("INI")); // Prevents bleedover to other instances
-		$this->plgText = $plgText;
+		$this->txtParam = $txtParam;
+		$this->txtFmt = $txtFmt;
 		$this->argre = $argre;
 
 		$matches = Array();
-		preg_match_all($this->argre, $this->plgText, $matches);
-
+		preg_match_all($this->argre, $this->txtParam, $matches);
 		foreach ($matches[1] as $match) {
 			list($key, $value) = explode(' ', $match, 2) + Array("", "");
 			$value = str_replace("\\",'',$value);
-			if  (strpos($key, '+') === 0) {
-				$key = substr($key, 1);
-				$this->params->set($key, $value);
-				$this->plgParams[$key] = $value;
-			}
-			else {
-				$this->fmtParams[$key] = $value;
-			}
+			$this->params->set($key, $value);
+			$this->plgParams[$key] = $value;
 		}
 
 		$this->dataobj = $this->setDataObj();
@@ -114,8 +137,8 @@ class PluginKeywordsHelper {
 		return $plgText;
 	}
 
-	function replace() {
-		return preg_replace_callback($this->argre, array($this, 'replaceSingle'), $this->plgText);
+	function replace($txt) {
+		return preg_replace_callback($this->argre, array($this, 'replaceSingle'), $txt);
 	}
 
 	function replaceSingle($val) {
@@ -125,45 +148,11 @@ class PluginKeywordsHelper {
 			return call_user_func(array($this, $func), $arg);
 		}
 
-		return "";
+		return $val;
 	}
 }
 
 class GCalendarKeywordsHelper extends PluginKeywordsHelper {
-
-	function replace() {
-		$start = $this->dataobj->get_start_date();
-		$end = $this->dataobj->get_end_date();
-		$now = time();
-		$start_soon = date($this->params->get('start_soon', '-4 hours'), $start);
-		$end_soon = date($this->params->get('end_soon', '-2 hours'), $end);
-		$plgText = preg_replace($this->argre, "", $this->plgText);
-		$plgText = preg_replace('/\s+/', "", $plgText);
-		$text = '';
-
-		if ($plgText) {
-			$this->params->set('output', $this->plgText);
-		}
-
-		if ($end <= $now) { // AND it hasn't ended
-			if ($start >= $now) { // If it has started
-				$text = $this->params->get('output_now');
-			}
-			elseif ($start_soon >= $now) {
-				$text = $this->params->get('output_start_soon', 'starting soon');
-			}
-			elseif ($end_soon >= $now ) {
-				$text = $this->params->get('output_end_soon', 'ending soon');
-			}
-		}
-
-		if ($text == "" or $text == null) {
-			$text = $this->params->get('output');
-		}
-
-		return preg_replace_callback($this->argre, array($this, 'replaceSingle'), $text);
-	}
-
 
 	function setDataObj() {
 		$params = $this->params;
@@ -184,9 +173,9 @@ class GCalendarKeywordsHelper extends PluginKeywordsHelper {
 
 	function date($format, $time) {
 		if ($format == "") {
-			$format = $this->params->get("dateformat", "%B %d, %Y @ %I:%M%P");
+			$format = $this->params->get("dateformat", 'F d, Y @ g:ia');
 		}
-		return strftime($format, $time);
+		return GCalendarUtil::formatDate($format, $time);
 	}
 
 	function datecalc($param, $time) {
@@ -200,9 +189,9 @@ class GCalendarKeywordsHelper extends PluginKeywordsHelper {
 		return $this->datecalc($param, $event->get_start_date());
 	}
 
-	function finishoffset($param, $fmt) {
+	function finishoffset($param) {
 		$event = $this->event();
-		return $this->datecalc($param, $event->get_finish_date());
+		return $this->datecalc($param, $event->get_end_date());
 	}	
 
 	function startdate($param) {
@@ -238,24 +227,21 @@ class GCalendarKeywordsHelper extends PluginKeywordsHelper {
 		else {
 			switch($event->get_day_type()) {
 				case $event->SINGLE_WHOLE_DAY:
-					$fmt = $this->params->get("only-whole_day", "%A, %B %d, %Y all day");
+					$fmt = $this->params->get("only-whole_day", JText::_('PLG_GCALENDAR_NEXT_OUTPUT_SINGLE_WHOLE_DAY'));
 					break;
 				case $event->SINGLE_PART_DAY:
-					$fmt = $this->params->get("only-part_day", "%A, %B %d, %Y %I:%M%P until %%I:%%M%%P");
+					$fmt = $this->params->get("only-part_day", JText::_('PLG_GCALENDAR_NEXT_OUTPUT_SINGLE_PART_DAY'));
 					break;
 				case $event->MULTIPLE_WHOLE_DAY:
-					$fmt = $this->params->get("multi-whole_day", "%B %d - %%d, %%Y all day");
+					$fmt = $this->params->get("multi-whole_day", JText::_('PLG_GCALENDAR_NEXT_OUTPUT_MULTI_WHOLE_DAY'));
 					break;
 				case $event->MULTIPLE_PART_DAY:
-					$fmt = $this->params->get("multi-part_day", "%A, %B %d, %Y %I:%M%P until %%A, %%B %%d, %%Y %%I:%%M%%P");
+					$fmt = $this->params->get("multi-part_day", JText::_('PLG_GCALENDAR_NEXT_OUTPUT_MULTI_PART_DAY'));
 					break;
 			}
 		}
 
-		$str = $this->start($fmt);
-		$str = $this->finish($str);
-
-		return $str;
+		return $this->replace($fmt);
 	}
 
 	function duration($param, $interval) {
@@ -264,10 +250,10 @@ class GCalendarKeywordsHelper extends PluginKeywordsHelper {
 		$minutes = 0;
 		$seconds = 0;
 
-		if (strpos($param, '%d') !== FALSE) {
+		if (strpos($param, 'd') !== FALSE) {
 			$days = intval($interval / (24 * 3600));
 			$interval = $interval - ($days * 24 * 3600);
-			$param = str_replace('%d', $days, $param);
+			$param = str_replace('d', $days, $param);
 		}
 
 		if (strpos($param, '%h') !== FALSE) {

@@ -20,7 +20,6 @@
 
 defined('_JEXEC') or die('Restricted access');
 
-
 $calendar = $this->gcalendar;
 
 defined('_JEXEC') or die('Restricted access');
@@ -30,7 +29,7 @@ JHtml::_('behavior.tooltip');
 <form action="<?php echo JRoute::_('index.php?option=com_gcalendar&layout=edit&id='.(int) $calendar->id); ?>" method="post" name="adminForm" id="gcalendar-form">
 	<div class="width-60 fltlft">
 		<fieldset class="adminform">
-			<legend><?php echo JText::_( 'COM_GCALENDAR_GCALENDAR_DETAILS' ); ?></legend>
+			<legend><?php echo JText::_( 'COM_GCALENDAR_VIEW_GCALENDAR_DETAILS' ); ?></legend>
 			<ul class="adminformlist">
 <?php foreach($this->form->getFieldset('details') as $field){ ?>
 				<li><?php echo $field->label;echo $field->input;?></li>
@@ -44,8 +43,6 @@ JHtml::_('behavior.tooltip');
 	</div>
 </form>
 
-<div align="center"><br clear="both">
-<img src="media/com_gcalendar/images/gcalendar.gif" width="156"
-	height="30"><br>
+<div align="center" style="clear: both">
 &copy;&nbsp;&nbsp;2011 <a href="http://g4j.laoneo.net"
 	target="_blank">allon moritz</a></div>
