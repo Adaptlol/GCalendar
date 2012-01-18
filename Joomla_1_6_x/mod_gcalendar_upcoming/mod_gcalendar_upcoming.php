@@ -20,16 +20,10 @@
 
 defined( '_JEXEC' ) or die( 'Restricted access' );
 
-require_once (dirname(__FILE__).DS.'helper.php');
 require_once (JPATH_ADMINISTRATOR.DS.'components'.DS.'com_gcalendar'.DS.'util.php');
+require_once (JPATH_ADMINISTRATOR.DS.'components'.DS.'com_gcalendar'.DS.'libraries'.DS.'GCalendar'.DS.'GCalendarZendHelper.php');
 
-$params->set('expand_events', 1);
-$startDate = $params->get('start_date', '');
-if(empty($startDate)){
-	$params->set('start_date', 'now');
-	$params->set('past_events', 0);
-}
-$params->set('gc_cache_folder', 'mod_gcalendar_upcoming');
+require_once (dirname(__FILE__).DS.'helper.php');
 
 $gcalendar_data = ModGCalendarUpcomingHelper::getCalendarItems($params);
 require( JModuleHelper::getLayoutPath( 'mod_gcalendar_upcoming' ) );

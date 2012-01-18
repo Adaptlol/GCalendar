@@ -25,6 +25,10 @@ $document = &JFactory::getDocument();
 $document->addScript(JURI::base(). 'components/com_gcalendar/libraries/fullcalendar/fullcalendar.min.js' );
 $document->addStyleSheet(JURI::base().'components/com_gcalendar/libraries/fullcalendar/fullcalendar.css');
 $document->addScript(JURI::base().'components/com_gcalendar/libraries/jquery/ui/jquery-ui.custom.min.js');
+$document->addScript(JURI::base().'components/com_gcalendar/libraries/jquery/fancybox/jquery.easing-1.3.pack.js');
+$document->addScript(JURI::base().'components/com_gcalendar/libraries/jquery/fancybox/jquery.mousewheel-3.0.4.pack.js');
+$document->addScript(JURI::base().'components/com_gcalendar/libraries/jquery/fancybox/jquery.fancybox-1.3.4.pack.js');
+$document->addStyleSheet(JURI::base().'components/com_gcalendar/libraries/jquery/fancybox/jquery.fancybox-1.3.4.css');
 $document->addScript(JURI::base().'components/com_gcalendar/libraries/jquery/ext/jquery.ba-hashchange.min.js');
 $document->addScript(JURI::base().'components/com_gcalendar/libraries/jquery/ext/jquery.qtip-1.0.0.min.js');
 $document->addStyleDeclaration("#ui-datepicker-div { z-index: 15 important!; }");
@@ -135,6 +139,10 @@ $calCode .= "		monthNames: ".$monthsLong.",\n";
 $calCode .= "		monthNamesShort: ".$monthsShort.",\n";
 $calCode .= "		dayNames: ".$daysLong.",\n";
 $calCode .= "		dayNamesShort: ".$daysShort.",\n";
+if($params->get('calendar_height', 0) > 0){
+	$calCode .= "		contentHeight: ".$params->get('calendar_height', 0).",\n";
+}
+$calCode .= "		dayNamesShort: ".$daysShort.",\n";
 $calCode .= "		timeFormat: { \n";
 $calCode .= "			month: '".Fullcalendar::convertFromPHPDate($params->get('timeformat_month', 'H:i{ - H:i}'))."',\n";
 $calCode .= "			week: \"".Fullcalendar::convertFromPHPDate($params->get('timeformat_week', "H:i{ - H:i}"))."\",\n";
@@ -177,23 +185,28 @@ $calCode .= "						}\n";
 $calCode .= "					}\n";
 $calCode .= "				});\n";
 $calCode .= "		},\n";
-$calCode .= "		eventClick: function(event) {\n";
 if($params->get('show_event_as_popup', 1) == 1){
 	$popupWidth = $params->get('popup_width', 650);
 	$popupHeight = $params->get('popup_height', 500);
-	$calCode .= "		    if (event.url) {\n";
-	$calCode .= "		        jQuery('<iframe src=\"'+event.url+'&tmpl=component\" />').dialog({\n";
+	$calCode .= "		eventAfterRender: function(event, element, view) {\n";
+	$calCode .= "		        element.attr('href', element.attr('href') + (element.attr('href').indexOf('?') != -1 ? '&' : '?')+'tmpl=component');\n";
+	$calCode .= "		        element.fancybox({\n";
 	$calCode .= "		           width: ".$popupWidth.",\n";
 	$calCode .= "		           height: ".$popupHeight.",\n";
-	$calCode .= "		           modal: true,\n";
-	$calCode .= "		           autoResize: true,\n";
-	$calCode .= "		           title: event.title\n";
-	$calCode .= "		        }).outerWidth(".($popupWidth-20).").outerHeight(".($popupHeight-20).");\n";
-	$calCode .= "		        return false;}\n";
+	$calCode .= "		           autoScale : false,\n";
+	$calCode .= "		           autoDimensions : false, \n";
+	$calCode .= "		           transitionIn : 'elastic',\n";
+	$calCode .= "		           transitionOut : 'elastic',\n";
+	$calCode .= "		           speedIn : 600,\n";
+	$calCode .= "		           speedOut : 200,\n";
+	$calCode .= "		           type : 'iframe',\n"; 	
+	$calCode .= "		           onStart : function() { element.qtip('hide'); },\n";
+	$calCode .= "		        });\n";
+	$calCode .= "		},\n";
+	$calCode .= "		eventClick: function(event) {if (event.url) {return false;}},\n";
 }
-$calCode .= "		},\n";
 $calCode .= "		dayClick: function(date, allDay, jsEvent, view) {\n";
-$calCode .= "			jQuery('#gcalendar_component').fullCalendar('gotoDate', date).fullCalendar('changeView', 'agendaDay');\n";
+$calCode .= "			dayClickCustom(date, allDay, jsEvent, view);\n";
 $calCode .= "		},\n";
 $calCode .= "		loading: function(bool) {\n";
 $calCode .= "			if (bool) {\n";
@@ -258,7 +271,9 @@ $calCode .= "			jQuery('#gcalendar_component').fullCalendar('gotoDate', date);\n
 $calCode .= "		if(view.name != tmpView)\n";
 $calCode .= "			jQuery('#gcalendar_component').fullCalendar('changeView', tmpView);\n";
 $calCode .= "	});\n";
+$calCode .= "	jQuery('.ui-widget-overlay').live('click', function() { jQuery('#gcalendar-dialog').dialog('close'); });\n";
 $calCode .= "});\n";
+$calCode .= "var dayClickCustom = function(date, allDay, jsEvent, view){jQuery('#gcalendar_component').fullCalendar('gotoDate', date).fullCalendar('changeView', 'agendaDay');}\n";
 $calCode .= "// ]]>\n";
 $document->addScriptDeclaration($calCode);
 
@@ -288,6 +303,11 @@ if($params->get('show_selection', 1) == 1){
 echo "<div id='gcalendar_component_loading' style=\"text-align: center;\"><img src=\"".JURI::base() . "media/com_gcalendar/images/ajax-loader.gif\"  alt=\"loader\" /></div>";
 echo "<div id='gcalendar_component'></div><div id='gcalendar_component_popup' style=\"visibility:hidden\" ></div>";
 echo $params->get( 'textafter' );
+
+$dispatcher = JDispatcher::getInstance();
+JPluginHelper::importPlugin('gcalendar');
+$dispatcher->trigger('onGCCalendarLoad', array('gcalendar_component'));
+
 echo "<div style=\"text-align:center;margin-top:10px\" id=\"gcalendar_powered\"><a href=\"http://g4j.laoneo.net\">Powered by GCalendar</a></div>\n";
 
 //hide buttons and tune CSS for printable format

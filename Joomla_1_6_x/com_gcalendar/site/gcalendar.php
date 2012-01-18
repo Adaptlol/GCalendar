@@ -22,16 +22,11 @@
 defined('_JEXEC') or die('Restricted access');
 
 require_once (JPATH_ADMINISTRATOR.DS.'components'.DS.'com_gcalendar'.DS.'util.php');
+require_once (JPATH_ADMINISTRATOR.DS.'components'.DS.'com_gcalendar'.DS.'libraries'.DS.'GCalendar'.DS.'GCalendarZendHelper.php');
 
 require_once (JPATH_COMPONENT.DS.'controller.php');
 
-// Create the controller
 $controller = new GCalendarController( );
-
-// Perform the Request task
 $controller->execute( JRequest::getCmd('task'));
-
-// Redirect if set by the controller
 $controller->redirect();
-
 ?>
