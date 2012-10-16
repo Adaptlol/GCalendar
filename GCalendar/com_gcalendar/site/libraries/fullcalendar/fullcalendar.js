@@ -1006,10 +1006,10 @@ function EventManager(options, _sources) {
 				var startParam = firstDefined(source.startParam, options.startParam);
 				var endParam = firstDefined(source.endParam, options.endParam);
 				if (startParam) {
-					data[startParam] = Math.round(+rangeStart / 1000);
+					data[startParam] = Math.round(+(rangeStart.getTime() - rangeStart.getTimezoneOffset()*60*1000) / 1000);
 				}
 				if (endParam) {
-					data[endParam] = Math.round(+rangeEnd / 1000);
+					data[endParam] = Math.round(+(rangeEnd.getTime() - rangeStart.getTimezoneOffset()*60*1000) / 1000);
 				}
 				pushLoading();
 				$.ajax($.extend({}, ajaxDefaults, source, {
