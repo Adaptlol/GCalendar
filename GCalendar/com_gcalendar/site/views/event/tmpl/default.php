@@ -85,4 +85,4 @@ $dispatcher->trigger('onAfterDisplayEvent', array($this->event,  &$content, &$pl
 echo GCalendarUtil::renderEvents(array($this->event), $content, JFactory::getApplication()->getParams(), $plugins);
 
 if(!JFile::exists(JPATH_ADMINISTRATOR.'/components/com_gcalendarap/gcalendarap.php'))
-	echo "<div style=\"text-align:center;margin-top:10px\" ><a href=\"http://g4j.digital-peak.com\">GCalendar the joomla calendar</a></div>\n";
+	echo "<div style=\"text-align:center;margin-top:10px\" ><a href=\"http://g4j.digital-peak.com\">GCalendar</a></div>\n";
