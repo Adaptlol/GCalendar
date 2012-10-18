@@ -49,8 +49,8 @@ if($event->getDayType() == GCalendar_Entry::SINGLE_WHOLE_DAY || $event->getDayTy
 	$vevent->setProperty('dtstart', $event->getStartDate()->format('Ymd'));
 	$vevent->setProperty('dtend', $event->getEndDate()->format('Ymd'));
 } else {
-	$vevent->setProperty('dtstart', $event->getStartDate()->format('YmdHisZ'));
-	$vevent->setProperty('dtend', $event->getEndDate()->format('YmdHisZ'));
+	$vevent->setProperty('dtstart', $event->getStartDate()->format('Ymd\THisZ'));
+	$vevent->setProperty('dtend', $event->getEndDate()->format('Ymd\THisZ'));
 }
 $vevent->setProperty('location', $event->getLocation() );
 $vevent->setProperty('summary', $event->getTitle() );
