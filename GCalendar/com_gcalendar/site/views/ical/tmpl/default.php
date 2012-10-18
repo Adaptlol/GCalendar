@@ -49,12 +49,12 @@ if($event->getDayType() == GCalendar_Entry::SINGLE_WHOLE_DAY || $event->getDayTy
 	$vevent->setProperty('dtstart', $event->getStartDate()->format('Ymd'));
 	$vevent->setProperty('dtend', $event->getEndDate()->format('Ymd'));
 } else {
-	$vevent->setProperty('dtstart', $event->getStartDate()->format('YmdHis'));
-	$vevent->setProperty('dtend', $event->getEndDate()->format('YmdHis'));
+	$vevent->setProperty('dtstart', $event->getStartDate()->format('YmdHisZ'));
+	$vevent->setProperty('dtend', $event->getEndDate()->format('YmdHisZ'));
 }
 $vevent->setProperty('location', $event->getLocation() );
 $vevent->setProperty('summary', $event->getTitle() );
 $vevent->setProperty('description', $event->getContent());
 
-// echo '<pre>'.$v->createCalendar().'</pre>';
+// echo '<pre>'.$v->createCalendar().'</pre>';die;
 $v->returnCalendar();
