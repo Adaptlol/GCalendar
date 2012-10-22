@@ -86,4 +86,5 @@ if (!empty($this->calendars)) {
 		}
 	}
 }
+ob_clean();
 echo json_encode($data);

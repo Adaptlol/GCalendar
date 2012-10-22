@@ -74,4 +74,5 @@ foreach ($tmp as $date => $events){
 			'description' => GCalendarUtil::renderEvents($events, sprintf(JText::_('COM_GCALENDAR_JSON_VIEW_EVENT_TITLE'), count($events)).'<ul>{{#events}}<li>{{title}}</li>{{/events}}</ul>', $params)
 	);
 }
+ob_clean();
 echo json_encode($data);
