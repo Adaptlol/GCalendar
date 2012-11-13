@@ -58,16 +58,20 @@ function GCalendarParseRoute( $segments )
 	$vars = array();
 	$view = $segments[0];
 	//if the view is calendars it is a menu link
-	if($view == 'calendars')
-	$view = $item->query['view'];
+	if ($view == 'calendars') {
+		$view = $item->query['view'];
+	}
 	$vars['view'] = $view;
-
 	switch($view)
 	{
 		case 'event':
 			$vars['gcid'] = $segments[1];
-			$vars['eventID'] = $segments[2];
-			$vars['Itemid'] = GCalendarUtil::getItemId($segments[2]);
+			if (count($segments) < 3) {
+				$vars['eventID'] = JRequest::getVar('eventId');
+			} else {
+				$vars['eventID'] = $segments[2];
+			}
+			$vars['Itemid'] = GCalendarUtil::getItemId($vars['gcid']);
 			break;
 		case 'google':
 		case 'gcalendar':

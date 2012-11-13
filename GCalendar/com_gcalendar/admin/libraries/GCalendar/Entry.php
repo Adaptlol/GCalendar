@@ -35,108 +35,78 @@ class GCalendar_Entry extends Zend_Gdata_Calendar_EventEntry{
 	private $originalGCEvent = null;
 	private $params = array();
 
-	public function setParam($key, $value){
+	public function setParam($key, $value) {
 		$this->params[$key] = $value;
 	}
 
-	public function getParam($key){
+	public function getParam($key) {
 		return $this->params[$key];
 	}
 
-	public function getGCalId(){
-		if($this->gcalId == null){
+	public function getGCalId() {
+		if($this->gcalId == null) {
 			$this->gcalId = substr($this->getId(), strrpos($this->getId(), '/')+1);
 		}
 		return $this->gcalId;
 	}
 
-	public function getDayType(){
-		if($this->dayType == null){
-			$SECSINDAY = 86400;
-
-			$start = clone $this->getStartDate();
-			$start->modify('+1 day');
-			if($start->format('U') <= $this->getEndDate()->format('U')) {
-				if($start->format('U') == $this->getEndDate()->format('U') && $this->getStartDate()->format('g:i a') == '12:00 am') {
-					$this->dayType =  GCalendar_Entry::SINGLE_WHOLE_DAY;
+	public function getDayType() {
+		if ($this->dayType == null) {
+			$start = $this->getDate(true);
+			$end = $this->getDate(false);//echo $start->format('c').'    '.$end->format('c');
+			if ($start->format('g:i a') == '12:00 am' && $end->format('g:i a') == '12:00 am') {
+				// full day
+				$endModified = clone $end;
+				$endModified->modify('-1 day');
+				if ($start->format('Ymd') == $end->format('Ymd') || $start->format('Ymd') == $endModified->format('Ymd')) {
+					$this->dayType = GCalendar_Entry::SINGLE_WHOLE_DAY;
 				} else {
-					if($this->getStartDate()->format('g:i a') == '12:00 am' && $this->getEndDate()->format('g:i a') == '12:00 am') {
-						$this->dayType =  GCalendar_Entry::MULTIPLE_WHOLE_DAY;
-					} else {
-						$this->dayType =  GCalendar_Entry::MULTIPLE_PART_DAY;
-					}
+					$this->dayType = GCalendar_Entry::MULTIPLE_WHOLE_DAY;
 				}
 			} else {
-				$this->dayType = GCalendar_Entry::SINGLE_PART_DAY;
+				// part day
+				$this->dayType = $start->format('Ymd') == $end->format('Ymd') ? GCalendar_Entry::SINGLE_PART_DAY : GCalendar_Entry::MULTIPLE_PART_DAY;
 			}
 		}
 		return $this->dayType;
 	}
 
-	public function getStartDate(){
-		if($this->startDate == null){
-			$when = $this->getWhen();
-			if(empty($when) && $this->getRecurrence() != null) {
-				$parts = explode(PHP_EOL, $this->getRecurrence()->getText());
-				foreach ($parts as $part) {
-					if(strpos($part, 'DTSTART') === false) {
-						continue;
-					}
-					if(strpos($part, 'DTSTART;VALUE=DATE:') !== false) {
-						$this->startDate = JFactory::getDate(substr($part, 19).' 00:00:00');
-					} else {
-						$this->startDate = JFactory::getDate(substr($part, 8));
-					}
-				}
-			} else if(is_array($when)){
-				$when = reset($when);
-				$this->startDate = JFactory::getDate($when->getStartTime());
-			}
-			if($this->startDate != null && ($this->getDayType() == GCalendar_Entry::SINGLE_PART_DAY || $this->getDayType() == GCalendar_Entry::MULTIPLE_PART_DAY)) {
+	public function getStartDate() {
+		if($this->startDate == null) {
+			$this->startDate = $this->getDate(true);
+			if($this->getDayType() == GCalendar_Entry::SINGLE_PART_DAY || $this->getDayType() == GCalendar_Entry::MULTIPLE_PART_DAY) {
 				$this->startDate->setTimezone(new DateTimeZone(GCalendarUtil::getComponentParameter('timezone')));
 			}
 		}
 		return $this->startDate;
 	}
 
-	public function getEndDate(){
-		if($this->endDate == null){
-			$when = $this->getWhen();
-			if(empty($when) && $this->getRecurrence() != null) {
-				$parts = explode(PHP_EOL, $this->getRecurrence()->getText());
-				foreach ($parts as $part) {
-					if(strpos($part, 'DTEND') === false) {
-						continue;
-					}
-					if(strpos($part, 'DTEND;VALUE=DATE:') !== false) {
-						$this->endDate = JFactory::getDate(substr($part, 17).' 00:00:00');
-					} else {
-						$this->endDate = JFactory::getDate(substr($part, 6));
-					}
-				}
-			} else if(is_array($when)){
-				$when = reset($when);
-				$this->endDate = JFactory::getDate($when->getEndTime());
-			}
-			if($this->endDate != null && ($this->getDayType() == GCalendar_Entry::SINGLE_PART_DAY || $this->getDayType() == GCalendar_Entry::MULTIPLE_PART_DAY)) {
+	public function getEndDate() {
+		if($this->endDate == null) {
+			$this->endDate = $this->getDate(false);
+			if ($this->getDayType() == GCalendar_Entry::SINGLE_PART_DAY || $this->getDayType() == GCalendar_Entry::MULTIPLE_PART_DAY) {
 				$this->endDate->setTimezone(new DateTimeZone(GCalendarUtil::getComponentParameter('timezone')));
+			} else if ($this->getDayType() == GCalendar_Entry::MULTIPLE_WHOLE_DAY) {
+				$this->endDate->modify('-1 day');
+			} else if ($this->getDayType() == GCalendar_Entry::SINGLE_WHOLE_DAY) {
+				$this->endDate = clone $this->getStartDate();
 			}
 		}
 		return $this->endDate;
 	}
 
-	public function getModifiedDate(){
-		if($this->modifiedDate == null){
+	public function getModifiedDate() {
+		if($this->modifiedDate == null) {
 			$this->modifiedDate = JFactory::getDate($this->getPublished());
 			$this->modifiedDate->setTimezone(new DateTimeZone(GCalendarUtil::getComponentParameter('timezone')));
 		}
 		return $this->modifiedDate;
 	}
 
-	public function getLocation(){
-		if($this->location == null && $this->getWhere() !=null){
+	public function getLocation() {
+		if($this->location == null && $this->getWhere() !=null) {
 			$where = $this->getWhere();
-			if(is_array($where)){
+			if(is_array($where)) {
 				$where = reset($where);
 			}
 			$this->location = $where->getValueString();
@@ -196,7 +166,7 @@ class GCalendar_Entry extends Zend_Gdata_Calendar_EventEntry{
 	 * @param $event2
 	 * @return the comparison integer
 	 */
-	public static function compare(GCalendar_Entry $event1, GCalendar_Entry $event2){
+	public static function compare(GCalendar_Entry $event1, GCalendar_Entry $event2) {
 		return $event1->getStartDate()->format('U') - $event2->getStartDate()->format('U');
 	}
 
@@ -208,7 +178,49 @@ class GCalendar_Entry extends Zend_Gdata_Calendar_EventEntry{
 	 * @param GCalendar_Entry $event2
 	 * @return number
 	 */
-	public static function compareDesc(GCalendar_Entry $event1, GCalendar_Entry $event2){
+	public static function compareDesc(GCalendar_Entry $event1, GCalendar_Entry $event2) {
 		return $event2->getStartDate()->format('U') - $event1->getStartDate()->format('U');
+	}
+
+	private function getDate($start = true) {
+		$date = null;
+		if($start) {
+			$when = $this->getWhen();
+			if(empty($when) && $this->getRecurrence() != null) {
+				$parts = explode(PHP_EOL, $this->getRecurrence()->getText());
+				foreach ($parts as $part) {
+					if(strpos($part, 'DTSTART') === false) {
+						continue;
+					}
+					if(strpos($part, 'DTSTART;VALUE=DATE:') !== false) {
+						$date = JFactory::getDate(substr($part, 19).' 00:00:00');
+					} else {
+						$date = JFactory::getDate(substr($part, 8));
+					}
+				}
+			} else if(is_array($when)) {
+				$when = reset($when);
+				$date = JFactory::getDate($when->getStartTime());
+			}
+		} else {
+			$when = $this->getWhen();
+			if(empty($when) && $this->getRecurrence() != null) {
+				$parts = explode(PHP_EOL, $this->getRecurrence()->getText());
+				foreach ($parts as $part) {
+					if(strpos($part, 'DTEND') === false) {
+						continue;
+					}
+					if(strpos($part, 'DTEND;VALUE=DATE:') !== false) {
+						$date = JFactory::getDate(substr($part, 17).' 00:00:00');
+					} else {
+						$date = JFactory::getDate(substr($part, 6));
+					}
+				}
+			} else if(is_array($when)) {
+				$when = reset($when);
+				$date = JFactory::getDate($when->getEndTime());
+			}
+		}
+		return $date;
 	}
 }

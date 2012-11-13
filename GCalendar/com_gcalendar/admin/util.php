@@ -152,7 +152,7 @@ class GCalendarUtil {
 
 			$timeString = $startTime.' '.$startDate.' '.$dateSeparator.' '.$endTime.' '.$endDate;
 			$copyDateTimeFormat = 'Ymd';
-			switch($event->getDayType()) {
+			switch ($event->getDayType()) {
 				case GCalendar_Entry::SINGLE_WHOLE_DAY:
 					$timeString = $startDate;
 					$copyDateTimeFormat = 'Ymd';
@@ -166,9 +166,6 @@ class GCalendarUtil {
 					$copyDateTimeFormat = 'Ymd\THis';
 					break;
 				case GCalendar_Entry::MULTIPLE_WHOLE_DAY:
-					$tmp = clone $event->getEndDate();
-					$tmp->modify('-1 day');
-					$endDate = $tmp->format($dateformat, true);
 					$timeString = $startDate.' '.$dateSeparator.' '.$endDate;
 					$copyDateTimeFormat = 'Ymd';
 

@@ -64,17 +64,12 @@ if (!empty($this->calendars)) {
 			}
 			$allDayEvent = $event->getDayType() == GCalendar_Entry::SINGLE_WHOLE_DAY || $event->getDayType() == GCalendar_Entry::MULTIPLE_WHOLE_DAY;
 
-			$end = $event->getEndDate();
-			if ($allDayEvent) {
-				$end = clone $event->getEndDate();
-				$end->modify('-1 day');
-			}
 			$eventData = array(
 					'id' => $event->getGCalId(),
 					'gcid' => $event->getParam('gcid'),
 					'title' => htmlspecialchars_decode($event->getTitle()),
 					'start' => $event->getStartDate()->format('c', true),
-					'end' => $end->format('c', true),
+					'end' => $event->getEndDate()->format('c', true),
 					'url' => JRoute::_('index.php?option=com_gcalendar&view=event&eventID='.$event->getGCalId().'&gcid='.$event->getParam('gcid').(empty($itemID)?'':$itemID)),
 					'className' => "gcal-event_gccal_".$event->getParam('gcid'),
 					'allDay' => $allDayEvent,

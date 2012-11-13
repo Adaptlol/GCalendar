@@ -196,7 +196,7 @@ class GCalendarZendHelper{
 			$query->setProjection('full');
 			$query->setEvent($eventId);
 
-			$query->setParam('ctz', 'Etc/GMT');
+			$query->setParam('ctz', 'UTC');
 			$query->setParam('hl', GCalendarUtil::getFrLanguage());
 
 			$event = $service->getEntry($query, 'GCalendar_Entry');
