@@ -213,7 +213,7 @@ class GCalendarZendHelper{
 	public static function loadZendClasses() {
 		static $zendLoaded;
 		if($zendLoaded == null){
-			ini_set("include_path", ini_get("include_path") . PATH_SEPARATOR . JPATH_ADMINISTRATOR . DIRECTORY_SEPARATOR . 'components'. DIRECTORY_SEPARATOR .'com_gcalendar' . DIRECTORY_SEPARATOR . 'libraries');
+			ini_set("include_path", JPATH_ADMINISTRATOR . DIRECTORY_SEPARATOR . 'components'. DIRECTORY_SEPARATOR .'com_gcalendar' . DIRECTORY_SEPARATOR . 'libraries' . PATH_SEPARATOR . ini_get("include_path"));
 			if(!class_exists('Zend_Loader')){
 				require_once 'Zend/Loader.php';
 			}
