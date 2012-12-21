@@ -25,6 +25,12 @@ jimport( 'joomla.application.component.view');
 class GCalendarViewJSONFeed extends JViewLegacy {
 
 	public function display($tpl = null) {
+		$tz = new DateTimeZone(GCalendarUtil::getComponentParameter('timezone', 'UTC'));
+		$start = JFactory::getDate(JRequest::getInt('start'), $tz);
+		JRequest::setVar('start', $start->format('U') - $tz->getOffset($start));
+		$end = JFactory::getDate(JRequest::getInt('end'), $tz);
+		JRequest::setVar('end', $end->format('U') - $tz->getOffset($end));
+
 		$calendars = $this->get('GoogleCalendarFeeds');
 		if(!is_array($calendars)){
 			$calendars = array();
