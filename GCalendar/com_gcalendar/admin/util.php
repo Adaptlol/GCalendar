@@ -173,7 +173,7 @@ class GCalendarUtil {
 					$endTime = '';
 					break;
 				case GCalendar_Entry::MULTIPLE_PART_DAY:
-					$timeString = $startTime.' '.$startDate.' '.$dateSeparator.' '.$endTime.' '.$endDate;
+					$timeString = $startDate.' '.$startTime.' '.$dateSeparator.' '.$endDate.' '.$endTime;
 					$copyDateTimeFormat = 'Ymd\THis';
 					break;
 			}
