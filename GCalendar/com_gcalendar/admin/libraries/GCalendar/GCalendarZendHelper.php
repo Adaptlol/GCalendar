@@ -73,7 +73,17 @@ class GCalendarZendHelper{
 		}
 		$cache->setLifeTime(GCalendarUtil::getComponentParameter('gc_cache_time', 900));
 
-		$events = $cache->call( array( 'GCalendarZendHelper', 'internalGetEvents' ), $calendar, $startDate, $endDate, $max, $filter, $orderBy, $pastEvents, $sortOrder, $startIndex);
+		//make a simple object for caching id
+		$tmp = new JObject();
+		$tmp->id = $calendar->id;
+		$tmp->calendar_id = $calendar->calendar_id;
+		$tmp->magic_cookie = $calendar->magic_cookie;
+		$tmp->username = $calendar->username;
+		$tmp->password = $calendar->password;
+		$tmp->color = $calendar->color;
+		$tmp->name = $calendar->name;
+
+		$events = $cache->call(array('GCalendarZendHelper', 'internalGetEvents'), $tmp, $startDate, $endDate, $max, $filter, $orderBy, $pastEvents, $sortOrder, $startIndex);
 
 		// Implement View Level Access
 		$user = JFactory::getUser();
@@ -109,7 +119,17 @@ class GCalendarZendHelper{
 		}
 		$cache->setLifeTime(GCalendarUtil::getComponentParameter('gc_cache_time', 900));
 
-		$event =  $cache->call( array( 'GCalendarZendHelper', 'internalGetEvent' ), $calendar, $eventId);
+		//make a simple object for caching id
+		$tmp = new JObject();
+		$tmp->id = $calendar->id;
+		$tmp->calendar_id = $calendar->calendar_id;
+		$tmp->magic_cookie = $calendar->magic_cookie;
+		$tmp->username = $calendar->username;
+		$tmp->password = $calendar->password;
+		$tmp->color = $calendar->color;
+		$tmp->name = $calendar->name;
+
+		$event =  $cache->call(array('GCalendarZendHelper', 'internalGetEvent'), $calendar, $eventId);
 
 		// Implement View Level Access
 		$user = JFactory::getUser();
