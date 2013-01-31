@@ -129,7 +129,7 @@ class GCalendarZendHelper{
 		$tmp->color = $calendar->color;
 		$tmp->name = $calendar->name;
 
-		$event =  $cache->call(array('GCalendarZendHelper', 'internalGetEvent'), $calendar, $eventId);
+		$event =  $cache->call(array('GCalendarZendHelper', 'internalGetEvent'), $tmp, $eventId);
 
 		// Implement View Level Access
 		$user = JFactory::getUser();
