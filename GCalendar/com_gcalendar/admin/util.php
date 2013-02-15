@@ -151,32 +151,24 @@ class GCalendarUtil {
 			$dateSeparator = '-';
 
 			$timeString = $startTime.' '.$startDate.' '.$dateSeparator.' '.$endTime.' '.$endDate;
-			$copyDateTimeFormat = 'Ymd';
-			switch ($event->getDayType()) {
-				case GCalendar_Entry::SINGLE_WHOLE_DAY:
+			$copyDateTimeFormat = 'Ymd\THis';
+			$shortStart = $event->getStartDate()->format('Ymd', true);
+			$shortEnd = $event->getEndDate()->format('Ymd', true);
+			if ($event->isAllDay()) {
+				$copyDateTimeFormat = 'Ymd';
+
+				$startTime = '';
+				$endTime = '';
+				if ($shortStart == $shortEnd) {
 					$timeString = $startDate;
-					$copyDateTimeFormat = 'Ymd';
-
-					$startTime = '';
-					$endTime = '';
 					$dateSeparator = '';
-					break;
-				case GCalendar_Entry::SINGLE_PART_DAY:
-					$timeString = $startDate.' '.$startTime.' '.$dateSeparator.' '.$endTime;
-					$copyDateTimeFormat = 'Ymd\THis';
-					break;
-				case GCalendar_Entry::MULTIPLE_WHOLE_DAY:
+				} else {
 					$timeString = $startDate.' '.$dateSeparator.' '.$endDate;
-					$copyDateTimeFormat = 'Ymd';
-
-					$startTime = '';
-					$endTime = '';
-					break;
-				case GCalendar_Entry::MULTIPLE_PART_DAY:
-					$timeString = $startDate.' '.$startTime.' '.$dateSeparator.' '.$endDate.' '.$endTime;
-					$copyDateTimeFormat = 'Ymd\THis';
-					break;
+				}
+			} else if ($shortStart == $shortEnd) {
+				$timeString = $startDate.' '.$startTime.' '.$dateSeparator.' '.$endTime;
 			}
+
 			$variables['calendarName'] = $event->getParam('gcname');
 			$variables['title'] = (string)$event->getTitle();
 			if ($params->get('show_event_date', 1) == 1) {

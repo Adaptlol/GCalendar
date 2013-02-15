@@ -45,7 +45,7 @@ if(version_compare(PHP_VERSION, '5.3.0') >= 0){
 
 $vevent = &$v->newComponent('vevent');
 
-if($event->getDayType() == GCalendar_Entry::SINGLE_WHOLE_DAY || $event->getDayType() == GCalendar_Entry::MULTIPLE_WHOLE_DAY) {
+if($event->isAllDay()) {
 	$vevent->setProperty('dtstart', $event->getStartDate()->format('Ymd'));
 	$vevent->setProperty('dtend', $event->getEndDate()->format('Ymd'));
 } else {

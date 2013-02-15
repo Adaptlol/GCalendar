@@ -20,12 +20,7 @@
 
 class GCalendar_Entry extends Zend_Gdata_Calendar_EventEntry{
 
-	const SINGLE_WHOLE_DAY    = 1;
-	const SINGLE_PART_DAY     = 2;
-	const MULTIPLE_WHOLE_DAY  = 3;
-	const MULTIPLE_PART_DAY   = 4;
-
-	private $dayType = null;
+	private $allDay = null;
 	private $startDate = null;
 	private $endDate = null;
 	private $modifiedDate = null;
@@ -50,31 +45,19 @@ class GCalendar_Entry extends Zend_Gdata_Calendar_EventEntry{
 		return $this->gcalId;
 	}
 
-	public function getDayType() {
-		if ($this->dayType == null) {
+	public function isAllDay() {
+		if ($this->allDay === null) {
 			$start = $this->getDate(true);
-			$end = $this->getDate(false);//echo $start->format('c').'    '.$end->format('c');
-			if ($start->format('g:i a') == '12:00 am' && $end->format('g:i a') == '12:00 am') {
-				// full day
-				$endModified = clone $end;
-				$endModified->modify('-1 day');
-				if ($start->format('Ymd') == $end->format('Ymd') || $start->format('Ymd') == $endModified->format('Ymd')) {
-					$this->dayType = GCalendar_Entry::SINGLE_WHOLE_DAY;
-				} else {
-					$this->dayType = GCalendar_Entry::MULTIPLE_WHOLE_DAY;
-				}
-			} else {
-				// part day
-				$this->dayType = $start->format('Ymd') == $end->format('Ymd') ? GCalendar_Entry::SINGLE_PART_DAY : GCalendar_Entry::MULTIPLE_PART_DAY;
-			}
+			$end = $this->getDate(false);//echo $this->getTitle().' '.$start->format('c').'    '.$end->format('c').'<br><br>';
+			$this->allDay = $start->format('g:i a') == '12:00 am' && $end->format('g:i a') == '12:00 am';
 		}
-		return $this->dayType;
+		return $this->allDay;
 	}
 
 	public function getStartDate() {
 		if($this->startDate == null) {
 			$this->startDate = $this->getDate(true);
-			if($this->getDayType() == GCalendar_Entry::SINGLE_PART_DAY || $this->getDayType() == GCalendar_Entry::MULTIPLE_PART_DAY) {
+			if(!$this->isAllDay()) {
 				$this->startDate->setTimezone(new DateTimeZone(GCalendarUtil::getComponentParameter('timezone')));
 			}
 		}
@@ -83,14 +66,20 @@ class GCalendar_Entry extends Zend_Gdata_Calendar_EventEntry{
 
 	public function getEndDate() {
 		if($this->endDate == null) {
-			$this->endDate = $this->getDate(false);
-			if ($this->getDayType() == GCalendar_Entry::SINGLE_PART_DAY || $this->getDayType() == GCalendar_Entry::MULTIPLE_PART_DAY) {
-				$this->endDate->setTimezone(new DateTimeZone(GCalendarUtil::getComponentParameter('timezone')));
-			} else if ($this->getDayType() == GCalendar_Entry::MULTIPLE_WHOLE_DAY) {
-				$this->endDate->modify('-1 day');
-			} else if ($this->getDayType() == GCalendar_Entry::SINGLE_WHOLE_DAY) {
-				$this->endDate = clone $this->getStartDate();
+			$start = $this->getStartDate();
+			$end = $this->getDate(false);
+			if (!$this->isAllDay()) {
+				$end->setTimezone(new DateTimeZone(GCalendarUtil::getComponentParameter('timezone')));
+			} else {
+				$endModified = clone $end;
+				$endModified->modify('-1 day');
+				if ($start->format('Ymd') == $end->format('Ymd') || $start->format('Ymd') == $endModified->format('Ymd')) {
+					$end = clone $start;
+				} else {
+					$end = $endModified;
+				}
 			}
+			$this->endDate = $end;
 		}
 		return $this->endDate;
 	}

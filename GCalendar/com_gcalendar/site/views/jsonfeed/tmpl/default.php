@@ -62,7 +62,6 @@ if (!empty($this->calendars)) {
 			if (strlen($description) > 200) {
 				$description = mb_substr($description, 0, 196).' ...';
 			}
-			$allDayEvent = $event->getDayType() == GCalendar_Entry::SINGLE_WHOLE_DAY || $event->getDayType() == GCalendar_Entry::MULTIPLE_WHOLE_DAY;
 
 			$eventData = array(
 					'id' => $event->getGCalId(),
@@ -72,7 +71,7 @@ if (!empty($this->calendars)) {
 					'end' => $event->getEndDate()->format('c', true),
 					'url' => JRoute::_('index.php?option=com_gcalendar&view=event&eventID='.$event->getGCalId().'&gcid='.$event->getParam('gcid').(empty($itemID)?'':$itemID)),
 					'className' => "gcal-event_gccal_".$event->getParam('gcid'),
-					'allDay' => $allDayEvent,
+					'allDay' => $event->isAllDay(),
 					'description' => $description
 			);
 
