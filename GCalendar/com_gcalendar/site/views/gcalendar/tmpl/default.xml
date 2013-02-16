@@ -73,16 +73,16 @@
 				description="COM_GCALENDAR_FIELD_CONFIG_CALENDAR_DESC_TIME_FORMAT_DESC" />
 			<field name="description_format" type="textarea2" label="COM_GCALENDAR_FIELD_CONFIG_CALENDAR_DESC_FORMAT_LABEL"
 				description="COM_GCALENDAR_FIELD_CONFIG_CALENDAR_DESC_FORMAT_DESC"
-				rows="5" cols="50" filter="safehtml">
+				rows="5" cols="50" filter="raw">
 				<content></content>
 				<description>COM_GCALENDAR_MUSTACHE_DESC</description>
 			</field>
 			<field name="textbefore" type="textarea"
 				label="COM_GCALENDAR_FIELD_CONFIG_CALENDAR_TEXT_BEFORE_LABEL" description="COM_GCALENDAR_FIELD_CONFIG_CALENDAR_TEXT_BEFORE_DESC"
-				rows="5" cols="50" filter="safehtml"/>
+				rows="5" cols="50" filter="raw"/>
 			<field name="textafter" type="textarea"
 				label="COM_GCALENDAR_FIELD_CONFIG_CALENDAR_TEXT_AFTER_LABEL" description="COM_GCALENDAR_FIELD_CONFIG_CALENDAR_TEXT_AFTER_DESC"
-				rows="5" cols="50" filter="safehtml"/>
+				rows="5" cols="50" filter="raw"/>
 			<field name="show_event_as_popup" type="list"
 				label="COM_GCALENDAR_FIELD_CONFIG_CALENDAR_SHOW_POPUP_LABEL" description="COM_GCALENDAR_FIELD_CONFIG_CALENDAR_SHOW_POPUP_DESC">
 				<option value="">JGLOBAL_USE_GLOBAL</option>

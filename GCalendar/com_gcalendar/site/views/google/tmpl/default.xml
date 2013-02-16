@@ -67,10 +67,10 @@
 				description="" />
 			<field name="textbefore" type="textarea" default=""
 				label="COM_GCALENDAR_VIEW_GOOGLE_FIELD_TEXT_BEFORE_LABEL" description="COM_GCALENDAR_VIEW_GOOGLE_FIELD_TEXT_BEFORE_DESC"
-				rows="5" cols="50" filter="safehtml"/>
+				rows="5" cols="50" filter="raw"/>
 			<field name="textafter" type="textarea" default=""
 				label="COM_GCALENDAR_VIEW_GOOGLE_FIELD_TEXT_AFTER_LABEL" description="COM_GCALENDAR_VIEW_GOOGLE_FIELD_TEXT_AFTER_DESC"
-				rows="5" cols="50" filter="safehtml"/>
+				rows="5" cols="50" filter="raw"/>
 		</fieldset>
 		<fieldset name="advanced">
 			<field name="use_custom_css" type="radio" default="0"
