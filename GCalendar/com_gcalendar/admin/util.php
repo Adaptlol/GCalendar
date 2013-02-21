@@ -20,10 +20,15 @@
 
 defined('_JEXEC') or die('Restricted access');
 
-require_once(JPATH_ADMINISTRATOR.'/components/com_gcalendar/dbutil.php');
+if (!defined('DS')) {
+	define('DS', DIRECTORY_SEPARATOR);
+}
+
+JLoader::import('components.com_gcalendar.dbutil', JPATH_ADMINISTRATOR);
+JLoader::import('components.com_gcalendar.libraries.GCalendar.GCalendarZendHelper', JPATH_ADMINISTRATOR);
 
 if (!class_exists('Mustache')) {
-	require_once(JPATH_ADMINISTRATOR.'/components/com_gcalendar/libraries/mustache/Mustache.php');
+	JLoader::import('components.com_gcalendar.libraries.mustache.Mustache', JPATH_ADMINISTRATOR);
 }
 
 class GCalendarUtil {
@@ -93,7 +98,7 @@ class GCalendarUtil {
 			$events = array();
 		}
 
-		JFactory::getLanguage()->load('com_gcalendar', JPATH_ADMINISTRATOR.'/components/com_gcalendar');
+		JFactory::getLanguage()->load('com_gcalendar', JPATH_ADMINISTRATOR.DS.'components'.DS.'com_gcalendar');
 
 		$lastHeading = '';
 
@@ -358,6 +363,28 @@ class GCalendarUtil {
 		}
 
 		return $result;
+	}
+
+	public static function isJoomlaVersion($version) {
+		$j = new JVersion();
+		return substr($j->RELEASE, 0, strlen($version)) == $version;
+	}
+
+	public static function loadjQuery() {
+		if (JFactory::getDocument()->getType() != 'html') {
+			return ;
+		}
+
+		if (self::isJoomlaVersion('2.5')) {
+			if (JFactory::getApplication()->get('jquery') !== true) {
+				JFactory::getApplication()->set('jQuery', true);
+				JFactory::getApplication()->set('jquery', true);
+				JFactory::getDocument()->addScript("/GCJQLIB");
+				JFactory::getApplication()->set('gcjQuery', true);
+			}
+		} else {
+			JHtml::_('jquery.framework');
+		}
 	}
 
 	// http://core.trac.wordpress.org/browser/trunk/wp-includes/formatting.php#L1461

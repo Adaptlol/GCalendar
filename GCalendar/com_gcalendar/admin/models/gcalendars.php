@@ -22,7 +22,7 @@ defined('_JEXEC') or die();
 
 jimport('joomla.application.component.modellist');
 
-JTable::addIncludePath(JPATH_ADMINISTRATOR.'/components/com_gcalendar/tables');
+JTable::addIncludePath(JPATH_ADMINISTRATOR.DS.'components'.DS.'com_gcalendar'.DS.'tables');
 
 class GCalendarModelGCalendars extends JModelList {
 

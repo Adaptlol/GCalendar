@@ -18,17 +18,14 @@
  * @since 2.2.0
  */
 
-defined( '_JEXEC' ) or die( 'Restricted access' );
+defined('_JEXEC') or die();
 
-jimport( 'joomla.application.component.model' );
+JLoader::import('joomla.application.component.model');
 
-require_once (JPATH_ADMINISTRATOR.'/components/com_gcalendar/util.php');
-require_once (JPATH_ADMINISTRATOR.'/components/com_gcalendar/libraries/GCalendar/GCalendarZendHelper.php');
-
-require_once (dirname(__FILE__).'/helper.php');
-require_once (JPATH_BASE.'/components/com_gcalendar/libraries/fullcalendar/fullcalendar.php');
+JLoader::import('components.com_gcalendar.util', JPATH_ADMINISTRATOR);
+JLoader::import('components.com_gcalendar.libraries.fullcalendar.fullcalendar', JPATH_BASE);
 
 require_once (dirname(__FILE__).'/helper.php');
 
 $calendars = ModGCalendarHelper::getCalendars($params);
-require( JModuleHelper::getLayoutPath( 'mod_gcalendar' ) );
+require(JModuleHelper::getLayoutPath('mod_gcalendar'));

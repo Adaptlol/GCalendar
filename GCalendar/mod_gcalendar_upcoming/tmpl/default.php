@@ -30,7 +30,7 @@ $output = $params->get('output', '{{#events}}
 <p style="clear: both;"/>
 <div style="float:left;margin-right:6px;width:42px;height:42px;background-image:url(\'modules/mod_gcalendar_upcoming/tmpl/images/calendar-icon.gif\')">
 	<div style="background-color: #{{calendarcolor}};width:32px;height:10px;margin-top:6px;margin-left:5px;"></div>
-	<div style="color: #FFFFFF;padding:2px;font-weight:bold;font-size:10px;text-align:center;position:relative;margin-top:-16px;margin-bottom:-4px;">{{month}}</div>
+	<div style="color: #FFFFFF;padding:2px;font-weight:bold;font-size:10px;text-align:center;position:relative;margin-top:-13px;margin-bottom:-4px;">{{month}}</div>
 	<div style="color: #{{calendarcolor}};font-weight:bold;font-size:1.3em;width:42px;text-align:center;">{{day}}</div>
 </div>
 <p>{{date}}<br/><a href="{{{backlink}}}">{{title}}</a></p>

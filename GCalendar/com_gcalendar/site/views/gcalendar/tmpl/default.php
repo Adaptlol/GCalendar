@@ -20,7 +20,7 @@
 
 defined('_JEXEC') or die('Restricted access');
 
-JHtml::_('jquery.framework');
+GCalendarUtil::loadjQuery();
 
 if ($this->params->get('show_page_heading', 1)) { ?>
 	<h1>
@@ -203,7 +203,12 @@ if($params->get('show_event_as_popup', 1) == 1){
 	$calCode .= "		           speedIn : 600,\n";
 	$calCode .= "		           speedOut : 200,\n";
 	$calCode .= "		           type : 'iframe',\n";
-	$calCode .= "		           onCleanup : function(){if(jQuery('#fancybox-frame').contents().find('#system-message div').length > 0){jQuery('#gcalendar_component').fullCalendar('refetchEvents');}}\n";
+	if (GCalendarUtil::isJoomlaVersion('2.5')) {
+		$calCode .= "		           onCleanup : function(){if(jQuery('#fancybox-frame').contents().find('#system-message dt').length > 0){jQuery('#gcalendar_component').fullCalendar('refetchEvents');}}\n";
+	}
+	if (GCalendarUtil::isJoomlaVersion('3')) {
+		$calCode .= "		           onCleanup : function(){if(jQuery('#fancybox-frame').contents().find('#system-message div').length > 0){jQuery('#gcalendar_component').fullCalendar('refetchEvents');}}\n";
+	}
 	$calCode .= "		        });\n";
 	$calCode .= "			if (event.description){\n";
 	$calCode .= "				element.tipTip({content: event.description, defaultPosition: 'top'});}\n";
@@ -325,8 +330,8 @@ $dispatcher = JDispatcher::getInstance();
 JPluginHelper::importPlugin('gcalendar');
 $dispatcher->trigger('onGCCalendarLoad', array('gcalendar_component'));
 
-if(!JFile::exists(JPATH_ADMINISTRATOR.'/components/com_gcalendarap/gcalendarap.php'))
-	echo "<div style=\"text-align:center;margin-top:10px\" ><a href=\"http://g4j.digital-peak.com\">GCalendar</a></div>\n";
+if(!JFile::exists(JPATH_ADMINISTRATOR.DS.'components'.DS.'com_gcalendarap'.DS.'gcalendarap.php'))
+	echo "<div style=\"text-align:center;margin-top:10px\" ><a href=\"http://g4j.laoneo.net\">GCalendar</a></div>\n";
 
 //hide buttons and tune CSS for printable format
 if (JRequest::getVar('tmpl') == 'component'){

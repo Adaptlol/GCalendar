@@ -1,10 +1,10 @@
 Hello
-This is the install package for a joomla 1.6.x and above environments.
+This is the install package for a joomla 2.5.x and above environments.
 Here you will find the component, some modules and plugins to integrate google 
 calendar into your joomla based web site.
 
 ***** PREREQUISITS *****
-- joomla 1.6.x or above
+- joomla 2.5.x or above
 - google calendar account
 - mysql >= 5.0.0
 - PHP >= 5.2.0

@@ -26,6 +26,8 @@ if(!empty($error)){
 	return;
 }
 
+GCalendarUtil::loadjQuery();
+
 $data = array();
 $now = false;
 $targetDate = JFactory::getDate(0);

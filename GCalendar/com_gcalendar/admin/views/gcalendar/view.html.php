@@ -20,28 +20,19 @@
 
 defined('_JEXEC') or die();
 
-jimport( 'joomla.application.component.view' );
+JLoader::import('components.com_gcalendar.libraries.GCalendar.view', JPATH_ADMINISTRATOR);
 
-class GCalendarViewGCalendar extends JViewLegacy {
+class GCalendarViewGCalendar extends GCalendarView {
 
-	public function display($tpl = null) {
-		$this->form = $this->get('Form');
-		$this->gcalendar = $this->get('Item');
+	protected $gcalendar = null;
+	protected $form = null;
 
-		if (count($errors = $this->get('Errors'))) {
-			JError::raiseError(500, implode('<br />', $errors));
-			return false;
-		}
-
-		//get the calendar
-		$isNew = $this->gcalendar->id < 1;
-
-		JToolBarHelper::title(JText::_( 'COM_GCALENDAR_MANAGER_GCALENDAR' ), 'calendar');
-
+	protected function addToolbar() {
 		JRequest::setVar('hidemainmenu', true);
+
 		$canDo = GCalendarUtil::getActions($this->gcalendar->id);
-		if ($isNew) {
-			if ($canDo->get('core.create')){
+		if ($this->gcalendar->id < 1) {
+			if ($canDo->get('core.create')) {
 				JToolBarHelper::apply('gcalendar.apply', 'JTOOLBAR_APPLY');
 				JToolBarHelper::save('gcalendar.save', 'JTOOLBAR_SAVE');
 				JToolBarHelper::custom('gcalendar.save2new', 'save-new.png', 'save-new_f2.png', 'JTOOLBAR_SAVE_AND_NEW', false);
@@ -49,12 +40,10 @@ class GCalendarViewGCalendar extends JViewLegacy {
 			JToolBarHelper::cancel('gcalendar.cancel', 'JTOOLBAR_CANCEL');
 		} else {
 			if ($canDo->get('core.edit')) {
-				// We can save the new record
 				JToolBarHelper::apply('gcalendar.apply', 'JTOOLBAR_APPLY');
 				JToolBarHelper::save('gcalendar.save', 'JTOOLBAR_SAVE');
 
-				// We can save this record, but check the create permission to see if we can return to make a new one.
-				if ($canDo->get('core.create')){
+				if ($canDo->get('core.create')) {
 					JToolBarHelper::custom('gcalendar.save2new', 'save-new.png', 'save-new_f2.png', 'JTOOLBAR_SAVE_AND_NEW', false);
 				}
 			}
@@ -64,6 +53,11 @@ class GCalendarViewGCalendar extends JViewLegacy {
 			JToolBarHelper::cancel('gcalendar.cancel', 'JTOOLBAR_CLOSE');
 		}
 
-		parent::display($tpl);
+		parent::addToolbar();
+	}
+
+	protected function init() {
+		$this->form = $this->get('Form');
+		$this->gcalendar = $this->get('Item');
 	}
 }

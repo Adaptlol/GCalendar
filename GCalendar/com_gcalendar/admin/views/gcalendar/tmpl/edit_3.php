@@ -20,6 +20,8 @@
 
 defined('_JEXEC') or die('Restricted access');
 
+GCalendarUtil::loadjQuery();
+
 JHtml::_('behavior.tooltip');
 JHtml::_('behavior.formvalidation');
 JHtml::_('behavior.keepalive');

@@ -18,6 +18,8 @@
  * @since 2.2.0
  */
 
+jimport('joomla.application.component.controller');
+
 class GCalendarController extends JControllerLegacy {
 
 	public function display($cachable = false, $urlparams = false){
@@ -38,8 +40,6 @@ class GCalendarController extends JControllerLegacy {
 			JError::raiseNotice(0, JText::_('COM_GCALENDAR_FIELD_CONFIG_SETTINGS_TIMEZONE_WARNING'));
 		}
 		parent::display($cachable, $urlparams);
-
-		return $this;
 	}
 
 	public function import() {

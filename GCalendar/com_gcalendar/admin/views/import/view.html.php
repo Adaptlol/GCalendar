@@ -20,26 +20,31 @@
 
 defined('_JEXEC') or die();
 
-jimport( 'joomla.application.component.view' );
+JLoader::import('components.com_gcalendar.libraries.GCalendar.view', JPATH_ADMINISTRATOR);
 
-class GCalendarViewImport extends JViewLegacy {
+class GCalendarViewImport extends GCalendarView {
 
-	public function display($tpl = null) {
-		JToolBarHelper::title(JText::_( 'COM_GCALENDAR_MANAGER_GCALENDAR' ), 'calendar');
+	protected $onlineItems = null;
+	protected $dbItems = null;
 
-		if (JRequest::getWord('layout') != 'login') {
+	protected function addToolbar() {
+		if (strpos($this->getLayout(), 'login') === false) {
 			$canDo = GCalendarUtil::getActions();
 			if ($canDo->get('core.create')){
 				JToolBarHelper::custom('import.save', 'new.png', 'new.png', 'COM_GCALENDAR_VIEW_IMPORT_BUTTON_ADD', false);
 			}
 			JToolBarHelper::cancel('gcalendar.cancel', 'JTOOLBAR_CANCEL');
-
-			$this->onlineItems = $this->get('OnlineData');
-			$this->dbItems = $this->get('DBData');
 		}
 
 		JRequest::setVar('hidemainmenu', 0);
 
-		parent::display($tpl);
+		parent::addToolbar();
+	}
+
+	protected function init() {
+		if (strpos($this->getLayout(), 'login') === false) {
+			$this->onlineItems = $this->get('OnlineData');
+			$this->dbItems = $this->get('DBData');
+		}
 	}
 }

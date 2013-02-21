@@ -20,7 +20,7 @@
 
 defined('_JEXEC') or die('Restricted access');
 
-JHtml::_('jquery.framework');
+GCalendarUtil::loadjQuery();
 
 $document = JFactory::getDocument();
 $document->addScript(JURI::base().'components/com_gcalendar/libraries/jquery/ui/jquery-ui.custom.min.js');

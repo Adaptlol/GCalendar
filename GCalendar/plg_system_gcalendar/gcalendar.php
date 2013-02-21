@@ -15,14 +15,26 @@
  *
  * @author Allon Moritz
  * @copyright 2007-2011 Allon Moritz
- * @since 2.2.0
+ * @since 2.6.3
  */
+defined('_JEXEC') or die();
 
-JLoader::import('components.com_gcalendar.libraries.gcalendar.view', JPATH_SITE);
+JLoader::import('joomla.plugin.plugin');
+JLoader::import('components.com_gcalendar.util', JPATH_ADMINISTRATOR);
 
-class GCalendarViewEvent extends GCalendarView {
+class plgSystemGCalendar extends JPlugin {
 
-	public function init() {
-		$this->event = $this->get('GCalendar');
+	public function onAfterRender() {
+		if (!GCalendarUtil::isJoomlaVersion('2.5') || !JFactory::getApplication()->get('gcjQuery', false)) {
+			return;
+		}
+
+		$body = JResponse::getBody();
+
+		$body = preg_replace("#([\\\/a-zA-Z0-9_:\.-]*)jquery([0-9\.-]|min|pack)*?.js#", "", $body);
+		$body = str_ireplace('<script src="" type="text/javascript"></script>', "", $body);
+		$body = preg_replace("#/GCJQLIB#", JURI::root().'/components/com_gcalendar/libraries/jquery/jquery.min.js', $body);
+
+		JResponse::setBody($body);
 	}
 }

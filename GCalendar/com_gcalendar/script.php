@@ -41,7 +41,7 @@ class Com_GCalendarInstallerScript{
 			foreach (JFolder::files(JPATH_ADMINISTRATOR.'/language', '.*gcalendar.*', true, true) as $file){
 				JFile::delete($file);
 			}
-			foreach (JFolder::files(JPATH_SITE.'/language', '.*gcalendar.*', true, true) as $file){
+			foreach (JFolder::files(JPATH_SITE.DS.'language', '.*gcalendar.*', true, true) as $file){
 				JFile::delete($file);
 			}
 		}

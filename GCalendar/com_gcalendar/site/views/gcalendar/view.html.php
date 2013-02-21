@@ -20,7 +20,7 @@
 
 jimport( 'joomla.application.component.view');
 
-require_once (JPATH_COMPONENT.'/libraries/fullcalendar/fullcalendar.php');
+require_once (JPATH_COMPONENT.DS.'libraries'.DS.'fullcalendar'.DS.'fullcalendar.php');
 
 class GCalendarViewGCalendar extends JViewLegacy {
 

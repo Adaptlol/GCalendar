@@ -20,13 +20,17 @@
 
 defined('_JEXEC') or die();
 
-jimport( 'joomla.application.component.view' );
+JLoader::import('components.com_gcalendar.libraries.GCalendar.view', JPATH_ADMINISTRATOR);
 
-class GCalendarViewGCalendars extends JViewLegacy {
+class GCalendarViewGCalendars extends GCalendarView {
 
-	public function display($tpl = null) {
-		JToolBarHelper::title(JText::_('COM_GCALENDAR_MANAGER_GCALENDAR'), 'calendar');
+	protected $icon = 'calendar';
+	protected $title = 'COM_GCALENDAR_MANAGER_GCALENDAR';
 
+	protected $items = null;
+	protected $pagination = null;
+
+	protected function addToolbar() {
 		$canDo = GCalendarUtil::getActions();
 		if ($canDo->get('core.create')) {
 			JToolBarHelper::addNew('gcalendar.add', 'JTOOLBAR_NEW');
@@ -38,22 +42,12 @@ class GCalendarViewGCalendars extends JViewLegacy {
 		if ($canDo->get('core.delete')) {
 			JToolBarHelper::deleteList('', 'gcalendars.delete', 'JTOOLBAR_DELETE');
 		}
-		if ($canDo->get('core.admin')) {
-			JToolBarHelper::preferences('com_gcalendar', 550);
-			JToolBarHelper::divider();
-		}
 
-		$items = $this->get('Items');
-		$pagination = $this->get('Pagination');
+		parent::addToolbar();
+	}
 
-		if (count($errors = $this->get('Errors'))) {
-			JError::raiseError(500, implode('<br />', $errors));
-			return false;
-		}
-
-		$this->items = $items;
-		$this->pagination = $pagination;
-
-		parent::display($tpl);
+	protected function init() {
+		$this->items = $this->get('Items');
+		$this->pagination = $this->get('Pagination');
 	}
 }

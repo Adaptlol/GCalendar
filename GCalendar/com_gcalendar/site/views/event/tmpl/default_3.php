@@ -25,8 +25,8 @@ JPluginHelper::importPlugin('gcalendar');
 
 $document = JFactory::getDocument();
 $document->addStyleSheet(JURI::base(). 'components/com_gcalendar/views/gcalendar/tmpl/gcalendar.css' );
-$document->addStyleSheet(JURI::base().'components/com_gcalendar/views/event/tmpl/default.css');
-$document->addScript(JURI::base().'components/com_gcalendar/views/event/tmpl/default.js');
+$document->addStyleSheet(JURI::base().'components/com_gcalendar/views/event/tmpl/default_3.css');
+$document->addScript(JURI::base().'components/com_gcalendar/views/event/tmpl/default_3.js');
 
 $content = '{{#events}}
 {{#calendarLink}}

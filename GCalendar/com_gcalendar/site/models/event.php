@@ -20,7 +20,7 @@
 
 defined('_JEXEC') or die();
 
-jimport( 'joomla.application.component.model' );
+jimport('joomla.application.component.model');
 
 class GCalendarModelEvent extends JModelLegacy {
 
@@ -31,5 +31,12 @@ class GCalendarModelEvent extends JModelLegacy {
 		}
 
 		return GCalendarZendHelper::getEvent($results[0], JRequest::getVar('eventID', null));
+	}
+
+	protected function populateState() {
+		$app = JFactory::getApplication();
+
+		$params	= $app->getParams();
+		$this->setState('params', $params);
 	}
 }

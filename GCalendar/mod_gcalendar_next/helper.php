@@ -23,8 +23,6 @@
 
 defined('_JEXEC') or die('Restricted access');
 
-require_once (JPATH_ADMINISTRATOR.'/components/com_gcalendar/util.php');
-
 class ModGCalendarNextHelper  {
 
 	public static function getCalendarItems($params	) {

@@ -4,15 +4,15 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * GCalendar is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with GCalendar.  If not, see <http://www.gnu.org/licenses/>.
- * 
+ *
  * @author Allon Moritz
  * @copyright 2007-2011 Allon Moritz
  * @since 2.2.0
@@ -21,24 +21,16 @@
 defined('_JEXEC') or die('Restricted access'); ?>
 
 <h4>GCalendar Help</h4>
-<p>GCalendar is an extension for joomla based web sites which 
+<p>GCalendar is an extension for joomla based web sites which
 supports a smooth integration of your google calendar.</p>
 
-<h4>Donation</h4>
+<h4>GCalendar Action Pack</h4>
 <p>
-There is more effort behind GCalendar than you think... 
-<script type="text/javascript" src="http://www.ohloh.net/projects/26740/widgets/project_thin_badge"></script>
-
-<br><br>
-Because the sources are free the project depends on donations to support furthure 
-releases!! Please make a small donation with paypal.....<br><br>
+Do you want to <b>edit</b> your google events from within joomla consider the to buy the
+<a href="http://g4j.laoneo.net/extensions/gcalendar-action-pack.html" target="_blank">
+GCalendar Action Pack</a>.
 </p>
-<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
-<input name="cmd" value="_s-xclick" type="hidden">
-<input name="hosted_button_id" value="302238" type="hidden">
-<input src="https://www.paypal.com/en_US/CH/i/btn/btn_donateCC_LG.gif" name="submit" alt="" type="image" border="0">
-<img alt="" src="https://www.paypal.com/en_US/i/scr/pixel.gif" height="1" width="1" border="0">
-</form>
+<img src="http://g4j.laoneo.net/images/gcalendarap/features/edit-event.png" width="430" height="330" alt="edit-event">
 
 <h4>Documentation and Support</h4>
 <p>

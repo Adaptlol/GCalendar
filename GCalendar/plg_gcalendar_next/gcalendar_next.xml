@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<extension version="1.6" type="plugin" group="content" method="upgrade">
+<extension version="2.5" type="plugin" group="content" method="upgrade">
 	<name>plg_gcalendar_next</name>
 	<author>G4J Project</author>
 	<authorEmail>info@digital-peak.com</authorEmail>
@@ -8,7 +8,7 @@
 	</copyright>
 	<license>http://www.gnu.org/copyleft/gpl.html GNU/GPL</license>
 	<authorUrl>g4j.digital-peak.com</authorUrl>
-	<version>2.8.6</version>
+	<version>3.0.0</version>
 	<description>PLG_GCALENDAR_NEXT_XML_DESCRIPTION</description>
 
 	<files>

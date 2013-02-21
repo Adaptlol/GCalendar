@@ -20,8 +20,7 @@
 
 defined('_JEXEC') or die();
 
-require_once (JPATH_ADMINISTRATOR.'/components/com_gcalendar/util.php');
-require_once (JPATH_ADMINISTRATOR.'/components/com_gcalendar/libraries/GCalendar/GCalendarZendHelper.php');
+JLoader::import('components.com_gcalendar.util', JPATH_ADMINISTRATOR);
 
 require_once (dirname(__FILE__).'/helper.php');
 

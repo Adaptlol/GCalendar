@@ -20,10 +20,8 @@
 
 defined( '_JEXEC' ) or die( 'Restricted access' );
 
-jimport('joomla.plugin.plugin');
-
-require_once (JPATH_ADMINISTRATOR.'/components/com_gcalendar/util.php');
-require_once (JPATH_ADMINISTRATOR.'/components/com_gcalendar/libraries/GCalendar/GCalendarZendHelper.php');
+JLoader::import('joomla.plugin.plugin');
+JLoader::import('components.com_gcalendar.util', JPATH_ADMINISTRATOR);
 
 class plgSearchGCalendar extends JPlugin {
 

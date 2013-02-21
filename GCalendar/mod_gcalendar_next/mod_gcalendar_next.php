@@ -23,10 +23,9 @@
 
 defined( '_JEXEC' ) or die( 'Restricted access' );
 
-require_once (JPATH_ADMINISTRATOR.'/components/com_gcalendar/util.php');
-require_once (JPATH_ADMINISTRATOR.'/components/com_gcalendar/libraries/GCalendar/GCalendarZendHelper.php');
+JLoader::import('components.com_gcalendar.util', JPATH_ADMINISTRATOR);
 
 require_once (dirname(__FILE__).'/helper.php');
 
 $gcalendar_item = ModGCalendarNextHelper::getCalendarItems($params);
-require( JModuleHelper::getLayoutPath( 'mod_gcalendar_next') );
+require(JModuleHelper::getLayoutPath('mod_gcalendar_next'));

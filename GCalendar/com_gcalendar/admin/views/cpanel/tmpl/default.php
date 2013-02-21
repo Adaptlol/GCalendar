@@ -20,7 +20,8 @@
 
 defined('_JEXEC') or die();
 
-JHtml::_('jquery.framework');
+JLoader::import('joomla.environment.browser');
+GCalendarUtil::loadjQuery();
 ?>
 <div style="width:500px;">
 <h2><?php echo JText::_('COM_GCALENDAR_VIEW_CPANEL_WELCOME'); ?></h2>

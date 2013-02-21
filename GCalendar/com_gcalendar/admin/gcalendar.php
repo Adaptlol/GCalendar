@@ -18,18 +18,15 @@
  * @since 2.2.0
  */
 
-// no direct access
 defined('_JEXEC') or die('Restricted access');
 
-// Access check.
-if (!JFactory::getUser()->authorise('core.manage', 'com_gcalendar')){
+if (!JFactory::getUser()->authorise('core.manage', 'com_gcalendar')) {
 	return JError::raiseWarning(404, JText::_('JERROR_ALERTNOAUTHOR'));
 }
 
-require_once (JPATH_ADMINISTRATOR.'/components/com_gcalendar/util.php');
-require_once (JPATH_ADMINISTRATOR.'/components/com_gcalendar/libraries/GCalendar/GCalendarZendHelper.php');
+JLoader::import('components.com_gcalendar.util', JPATH_ADMINISTRATOR);
 
-$path = JPATH_ADMINISTRATOR.'/components/com_gcalendar/gcalendar.xml';
+$path = JPATH_ADMINISTRATOR.DS.'components'.DS.'com_gcalendar'.DS.'gcalendar.xml';
 if(file_exists($path)){
 	$manifest = simplexml_load_file($path);
 	JRequest::setVar('GCALENDAR_VERSION', $manifest->version);
