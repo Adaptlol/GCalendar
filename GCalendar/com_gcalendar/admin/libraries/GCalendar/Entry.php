@@ -13,10 +13,13 @@
  * You should have received a copy of the GNU General Public License
  * along with GCalendar.  If not, see <http://www.gnu.org/licenses/>.
  *
- * @author Allon Moritz
- * @copyright 2007-2012 Allon Moritz
- * @since 2.5.0
+ * @package		GCalendar
+ * @author		Digital Peak http://www.digital-peak.com
+ * @copyright	Copyright (C) 2007 - 2013 Digital Peak. All rights reserved.
+ * @license		http://www.gnu.org/licenses/gpl.html GNU/GPL
  */
+
+defined('_JEXEC') or die();
 
 class GCalendar_Entry extends Zend_Gdata_Calendar_EventEntry{
 

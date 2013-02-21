@@ -13,12 +13,13 @@
  * You should have received a copy of the GNU General Public License
  * along with GCalendar.  If not, see <http://www.gnu.org/licenses/>.
  *
- * @author Allon Moritz
- * @copyright 2007-2011 Allon Moritz
- * @since 2.2.0
+ * @package		GCalendar
+ * @author		Digital Peak http://www.digital-peak.com
+ * @copyright	Copyright (C) 2007 - 2013 Digital Peak. All rights reserved.
+ * @license		http://www.gnu.org/licenses/gpl.html GNU/GPL
  */
 
-defined('_JEXEC') or die('Restricted access');
+defined('_JEXEC') or die();
 
 GCalendarUtil::loadjQuery();
 
@@ -43,7 +44,7 @@ $input = JFactory::getApplication()->input;
 		<!-- Begin Content -->
 		<div class="span10 form-horizontal">
 			<ul class="nav nav-tabs">
-				<li class="active"><a href="#general" data-toggle="tab"><?php echo empty($this->item->id) ? JText::_('COM_GCALENDAR_VIEW_GCALENDAR_DETAILS') : JText::sprintf('COM_DPCALENDAR_EDIT_EVENT', $this->item->id); ?></a></li>
+				<li class="active"><a href="#general" data-toggle="tab"><?php echo empty($this->item->id) ? JText::_('COM_GCALENDAR_VIEW_GCALENDAR_DETAILS') : JText::sprintf('COM_GCALENDAR_VIEW_GCALENDAR_DETAILS', $this->item->id); ?></a></li>
 			</ul>
 			<div class="tab-content">
 				<!-- Begin Tabs -->

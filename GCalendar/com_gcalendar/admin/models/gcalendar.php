@@ -13,14 +13,15 @@
  * You should have received a copy of the GNU General Public License
  * along with GCalendar.  If not, see <http://www.gnu.org/licenses/>.
  *
- * @author Allon Moritz
- * @copyright 2007-2011 Allon Moritz
- * @since 2.2.0
+ * @package		GCalendar
+ * @author		Digital Peak http://www.digital-peak.com
+ * @copyright	Copyright (C) 2007 - 2013 Digital Peak. All rights reserved.
+ * @license		http://www.gnu.org/licenses/gpl.html GNU/GPL
  */
 
 defined('_JEXEC') or die();
 
-jimport('joomla.application.component.modeladmin');
+JLoader::import('joomla.application.component.modeladmin');
 
 class GCalendarModelGCalendar extends JModelAdmin
 {
@@ -30,27 +31,27 @@ class GCalendarModelGCalendar extends JModelAdmin
 		return JFactory::getUser()->authorise('core.edit', 'com_gcalendar.calendar.'.((int) isset($data[$key]) ? $data[$key] : 0)) or parent::allowEdit($data, $key);
 	}
 
-	public function getTable($type = 'GCalendar', $prefix = 'GCalendarTable', $config = array()) 
+	public function getTable($type = 'GCalendar', $prefix = 'GCalendarTable', $config = array())
 	{
 		return JTable::getInstance($type, $prefix, $config);
 	}
-	
-	public function getForm($data = array(), $loadData = true) 
+
+	public function getForm($data = array(), $loadData = true)
 	{
 		// Get the form.
 		$form = $this->loadForm('com_gcalendar.gcalendar', 'gcalendar', array('control' => 'jform', 'load_data' => $loadData));
-		if (empty($form)) 
+		if (empty($form))
 		{
 			return false;
 		}
 		return $form;
 	}
-	
-	protected function loadFormData() 
+
+	protected function loadFormData()
 	{
 		// Check the session for previously entered form data.
 		$data = JFactory::getApplication()->getUserState('com_gcalendar.edit.gcalendar.data', array());
-		if (empty($data)) 
+		if (empty($data))
 		{
 			$data = $this->getItem();
 		}

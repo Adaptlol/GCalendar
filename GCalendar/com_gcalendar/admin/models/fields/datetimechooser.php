@@ -13,9 +13,10 @@
  * You should have received a copy of the GNU General Public License
  * along with GCalendar.  If not, see <http://www.gnu.org/licenses/>.
  *
- * @author Allon Moritz
- * @copyright 2007-2011 Allon Moritz
- * @since 2.8.0
+ * @package		GCalendar
+ * @author		Digital Peak http://www.digital-peak.com
+ * @copyright	Copyright (C) 2007 - 2013 Digital Peak. All rights reserved.
+ * @license		http://www.gnu.org/licenses/gpl.html GNU/GPL
  */
 
 defined('_JEXEC') or die();

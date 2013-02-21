@@ -13,10 +13,13 @@
  * You should have received a copy of the GNU General Public License
  * along with GCalendar.  If not, see <http://www.gnu.org/licenses/>.
  *
- * @author Allon Moritz
- * @copyright 2007-2011 Allon Moritz
- * @since 2.4.0
+ * @package		GCalendar
+ * @author		Digital Peak http://www.digital-peak.com
+ * @copyright	Copyright (C) 2007 - 2013 Digital Peak. All rights reserved.
+ * @license		http://www.gnu.org/licenses/gpl.html GNU/GPL
  */
+
+defined('_JEXEC') or die();
 
 class Fullcalendar{
 	public static function convertFromPHPDate($format){
@@ -39,7 +42,7 @@ class Fullcalendar{
 			'L' => '',
             'o' => 'yyyy',
 			'Y' => 'yyyy',
-			'y' => 'yy', 
+			'y' => 'yy',
 			'a' => 'tt',
             'A' => 'TT',
 			'B' => '',

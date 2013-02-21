@@ -13,15 +13,13 @@
  * You should have received a copy of the GNU General Public License
  * along with GCalendar.  If not, see <http://www.gnu.org/licenses/>.
  *
- * This code was based on Allon Moritz's great work in the companion
- * upcoming module.
- *
- * @author Eric Horne
- * @copyright 2009-2011 Eric Horne
- * @since 2.2.0
+ * @package		GCalendar
+ * @author		Digital Peak http://www.digital-peak.com
+ * @copyright	Copyright (C) 2007 - 2013 Digital Peak. All rights reserved.
+ * @license		http://www.gnu.org/licenses/gpl.html GNU/GPL
  */
 
-defined( '_JEXEC' ) or die( 'Restricted access' );
+defined('_JEXEC') or die();
 
 JLoader::import('components.com_gcalendar.util', JPATH_ADMINISTRATOR);
 
