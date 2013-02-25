@@ -21,6 +21,8 @@
 
 defined('_JEXEC') or die();
 
+GCalendarUtil::loadjQuery();
+
 $dispatcher = JDispatcher::getInstance();
 JPluginHelper::importPlugin('gcalendar');
 
@@ -85,5 +87,5 @@ $dispatcher->trigger('onAfterDisplayEvent', array($this->event,  &$content, &$pl
 
 echo GCalendarUtil::renderEvents(array($this->event), $content, JFactory::getApplication()->getParams(), $plugins);
 
-if(!JFile::exists(JPATH_ADMINISTRATOR.'/components/com_gcalendarap/gcalendarap.php'))
+if(!JFile::exists(JPATH_ADMINISTRATOR.DS.'components'.DS.'com_gcalendarap'.DS.'gcalendarap.php'))
 	echo "<div style=\"text-align:center;margin-top:10px\" ><a href=\"http://g4j.digital-peak.com\">GCalendar</a></div>\n";
