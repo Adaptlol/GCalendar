@@ -25,6 +25,7 @@ class GCalendarView extends JViewLegacy {
 
 	protected $icon = 'calendar';
 	protected $title = 'COM_GCALENDAR_MANAGER_GCALENDAR';
+	protected $extension = 'com_gcalendar';
 
 	public function display($tpl = null) {
 		if (GCalendarUtil::isJoomlaVersion('2.5')) {
@@ -57,7 +58,7 @@ class GCalendarView extends JViewLegacy {
 		$document->addStyleDeclaration('.icon-48-'.$this->icon.' {background-image: url(../media/com_gcalendar/images/admin/48-'.$this->icon.'.png);background-repeat: no-repeat;}');
 
 		if ($canDo->get('core.admin')) {
-			JToolBarHelper::preferences('com_gcalendar', 550);
+			JToolBarHelper::preferences($this->extension, 550);
 			JToolBarHelper::divider();
 		}
 	}
