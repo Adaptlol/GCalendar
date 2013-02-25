@@ -384,6 +384,21 @@ class GCalendarUtil {
 		JFactory::getDocument()->addScript(JURI::root().'components/com_gcalendar/libraries/jquery/gcalendar/gcNoConflict.js');
 	}
 
+	public static function sendMessage($message, $error = false, array $data = array()) {
+		ob_clean();
+
+		JLoader::import('components.com_languages.helpers.jsonresponse', JPATH_ADMINISTRATOR);
+		if (!$error) {
+			JFactory::getApplication()->enqueueMessage($message);
+			echo new JJsonResponse($data);
+		} else {
+			JFactory::getApplication()->enqueueMessage($message, 'error');
+			echo new JJsonResponse($data);
+		}
+
+		JFactory::getApplication()->close();
+	}
+
 	// http://core.trac.wordpress.org/browser/trunk/wp-includes/formatting.php#L1461
 	public static function transformUrl( $text ) {
 		$ret = ' ' . $ret;
