@@ -69,7 +69,7 @@ GCalendarUtil::loadjQuery();
 <div id="twitter_div" style="float:left"></div>
 <script src="<?php echo JBrowser::getInstance()->isSSLConnection() ? 'https' : 'http'?>://widgets.twimg.com/j/2/widget.js"></script>
 <script>
-jQuery(document).ready(function() {
+gcjQuery(document).ready(function() {
 	new TWTR.Widget({
 		  id: 'twitter_div',
 		  version: 2,

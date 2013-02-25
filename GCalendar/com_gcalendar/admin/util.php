@@ -377,15 +377,11 @@ class GCalendarUtil {
 		}
 
 		if (self::isJoomlaVersion('2.5')) {
-			if (JFactory::getApplication()->get('jquery') !== true) {
-				JFactory::getApplication()->set('jQuery', true);
-				JFactory::getApplication()->set('jquery', true);
-				JFactory::getDocument()->addScript("/GCJQLIB");
-				JFactory::getApplication()->set('gcjQuery', true);
-			}
+			JFactory::getDocument()->addScript(JURI::root().'components/com_gcalendar/libraries/jquery/jquery.min.js');
 		} else {
 			JHtml::_('jquery.framework');
 		}
+		JFactory::getDocument()->addScript(JURI::root().'components/com_gcalendar/libraries/jquery/gcalendar/gcNoConflict.js');
 	}
 
 	// http://core.trac.wordpress.org/browser/trunk/wp-includes/formatting.php#L1461

@@ -78,8 +78,8 @@ foreach($calendars as $calendar) {
 $ids = rtrim($ids,',');
 
 $calCode = "// <![CDATA[ \n";
-$calCode .= "jQuery(document).ready(function(){\n";
-$calCode .= "   jQuery('#gcalendar_module_".$module->id."').fullCalendar({\n";
+$calCode .= "gcjQuery(document).ready(function(){\n";
+$calCode .= "   gcjQuery('#gcalendar_module_".$module->id."').fullCalendar({\n";
 $calCode .= "		events: '".html_entity_decode(JRoute::_('index.php?option=com_gcalendar&view=jsonfeed&layout=module&format=raw&gcids='.$ids))."',\n";
 $calCode .= "       header: {\n";
 $calCode .= "				left: 'prev,next ',\n";
@@ -115,9 +115,9 @@ $calCode .= "				element.tipTip({content: event.description, defaultPosition: 't
 $calCode .= "		},\n";
 $calCode .= "		loading: function(bool) {\n";
 $calCode .= "			if (bool) {\n";
-$calCode .= "				jQuery('#gcalendar_module_".$module->id."_loading').show();\n";
+$calCode .= "				gcjQuery('#gcalendar_module_".$module->id."_loading').show();\n";
 $calCode .= "			}else{\n";
-$calCode .= "				jQuery('#gcalendar_module_".$module->id."_loading').hide();\n";
+$calCode .= "				gcjQuery('#gcalendar_module_".$module->id."_loading').hide();\n";
 $calCode .= "			}\n";
 $calCode .= "		}\n";
 $calCode .= "	});\n";

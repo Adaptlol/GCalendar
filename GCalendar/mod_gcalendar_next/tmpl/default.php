@@ -76,10 +76,10 @@ $labels1 = array(JText::_('MOD_GCALENDAR_NEXT_LABEL_YEAR'),
 );
 
 $calCode = "// <![CDATA[ \n";
-$calCode .= "	jQuery(document).ready(function() {\n";
+$calCode .= "	gcjQuery(document).ready(function() {\n";
 $calCode .= "	var targetDate; \n";
 $calCode .= "	targetDate = new Date(".$targetDate->format("Y, m-1, d, H, i, 0", true).");\n";
-$calCode .= "	jQuery('#".$objid."').countdown({until: targetDate, \n";
+$calCode .= "	gcjQuery('#".$objid."').countdown({until: targetDate, \n";
 $calCode .= "				       description: '".str_replace('\'', '\\\'', $title)."', \n";
 $calCode .= " 				       layout: '".str_replace('\'', '\\\'',$layout)."', \n";
 $calCode .= " 				       labels: ['".implode("','", $labels)."'], \n";

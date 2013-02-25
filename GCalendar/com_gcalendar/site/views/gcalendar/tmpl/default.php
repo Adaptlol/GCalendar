@@ -101,7 +101,7 @@ $monthsLong .= "]";
 $monthsShort .= "]";
 
 $calCode = "// <![CDATA[ \n";
-$calCode .= "jQuery(document).ready(function(){\n";
+$calCode .= "gcjQuery(document).ready(function(){\n";
 $calCode .= "	var today = new Date();\n";
 $calCode .= "	var tmpYear = today.getFullYear();\n";
 $calCode .= "	var tmpMonth = today.getMonth();\n";
@@ -114,7 +114,7 @@ $calCode .= "		if(vars[i].match(\"^month\"))tmpMonth = vars[i].substring(6)-1;\n
 $calCode .= "		if(vars[i].match(\"^day\"))tmpDay = vars[i].substring(4);\n";
 $calCode .= "		if(vars[i].match(\"^view\"))tmpView = vars[i].substring(5);\n";
 $calCode .= "	}\n";
-$calCode .= "	jQuery('#gcalendar_component').fullCalendar({\n";
+$calCode .= "	gcjQuery('#gcalendar_component').fullCalendar({\n";
 $calCode .= "		header: {\n";
 $calCode .= "			left: 'prev,next today',\n";
 $calCode .= "			center: 'title',\n";
@@ -180,7 +180,7 @@ $calCode .= "		listTexts: {
 					},\n";
 $calCode .= $calsSources;
 $calCode .= "		viewDisplay: function(view) {\n";
-$calCode .= "			var d = jQuery('#gcalendar_component').fullCalendar('getDate');\n";
+$calCode .= "			var d = gcjQuery('#gcalendar_component').fullCalendar('getDate');\n";
 $calCode .= "			var newHash = 'year='+d.getFullYear()+'&month='+(d.getMonth()+1)+'&day='+d.getDate()+'&view='+view.name;\n";
 $calCode .= "			if(window.location.hash.replace(/&amp;/gi, \"&\") != newHash)\n";
 $calCode .= "			window.location.hash = newHash;\n";
@@ -205,10 +205,10 @@ if($params->get('show_event_as_popup', 1) == 1){
 	$calCode .= "		           speedOut : 200,\n";
 	$calCode .= "		           type : 'iframe',\n";
 	if (GCalendarUtil::isJoomlaVersion('2.5')) {
-		$calCode .= "		           onCleanup : function(){if(jQuery('#fancybox-frame').contents().find('#system-message dt').length > 0){jQuery('#gcalendar_component').fullCalendar('refetchEvents');}}\n";
+		$calCode .= "		           onCleanup : function(){if(gcjQuery('#fancybox-frame').contents().find('#system-message dt').length > 0){gcjQuery('#gcalendar_component').fullCalendar('refetchEvents');}}\n";
 	}
 	if (GCalendarUtil::isJoomlaVersion('3')) {
-		$calCode .= "		           onCleanup : function(){if(jQuery('#fancybox-frame').contents().find('#system-message div').length > 0){jQuery('#gcalendar_component').fullCalendar('refetchEvents');}}\n";
+		$calCode .= "		           onCleanup : function(){if(gcjQuery('#fancybox-frame').contents().find('#system-message div').length > 0){gcjQuery('#gcalendar_component').fullCalendar('refetchEvents');}}\n";
 	}
 	$calCode .= "		        });\n";
 	$calCode .= "			if (event.description){\n";
@@ -227,9 +227,9 @@ $calCode .= "			eventResizeCustom(event, dayDelta, minuteDelta, revertFunc, jsEv
 $calCode .= "		},\n";
 $calCode .= "		loading: function(bool) {\n";
 $calCode .= "			if (bool) {\n";
-$calCode .= "				jQuery('#gcalendar_component_loading').show();\n";
+$calCode .= "				gcjQuery('#gcalendar_component_loading').show();\n";
 $calCode .= "			}else{\n";
-$calCode .= "				jQuery('#gcalendar_component_loading').hide();\n";
+$calCode .= "				gcjQuery('#gcalendar_component_loading').hide();\n";
 $calCode .= "			}\n";
 $calCode .= "		}\n";
 $calCode .= "	});\n";
@@ -237,7 +237,7 @@ $class = empty($theme)?'fc':'ui';
 $calCode .= "	var custom_buttons = '<span class=\"fc-button fc-button-datepicker ".$class."-state-default ".$class."-corner-left ".$class."-corner-right\">'+\n";
 $calCode .= "			'<span class=\"fc-button-inner\"><span class=\"fc-button-content\">'+\n";
 $calCode .= "			'<input type=\"hidden\" id=\"gcalendar_component_date_picker\" value=\"\">'+\n";
-$calCode .= "			'<a onClick=\"jQuery(\'#gcalendar_component_date_picker\').datepicker(\'show\');\"><span>".JText::_('COM_GCALENDAR_GCALENDAR_VIEW_SHOW_DATEPICKER')."'+\n";
+$calCode .= "			'<a onClick=\"gcjQuery(\'#gcalendar_component_date_picker\').datepicker(\'show\');\"><span>".JText::_('COM_GCALENDAR_GCALENDAR_VIEW_SHOW_DATEPICKER')."'+\n";
 $calCode .= "			'</span></a>'+\n";
 $calCode .= "			'</span></span></span>';\n";
 $calCode .= "		custom_buttons +='<span class=\"fc-button fc-button-print ".$class."-state-default ".$class."-corner-left ".$class."-corner-right\">'+\n";
@@ -245,15 +245,15 @@ $calCode .= "			'<span class=\"fc-button-inner\"><span class=\"fc-button-content
 $calCode .= "			'<a onClick=\"print_view();\"><span class=\"".$class."-icon ".$class."-icon-print\">".JText::_('COM_GCALENDAR_GCALENDAR_VIEW_TOOLBAR_PRINT')."'+\n";
 $calCode .= "			'</span></a>'+\n";
 $calCode .= "			'</span></span></span>';\n";
-$calCode .= "	jQuery('span.fc-button-today').after(custom_buttons);\n";
-$calCode .= "	if (jQuery('table').disableSelection) jQuery('div.fc-button-today').closest('table.fc-header').disableSelection();\n";
-$calCode .= "	jQuery('div.fc-button-datepicker, div.fc-button-print')\n";
+$calCode .= "	gcjQuery('span.fc-button-today').after(custom_buttons);\n";
+$calCode .= "	if (gcjQuery('table').disableSelection) gcjQuery('div.fc-button-today').closest('table.fc-header').disableSelection();\n";
+$calCode .= "	gcjQuery('div.fc-button-datepicker, div.fc-button-print')\n";
 $calCode .= "		.mousedown( function(){ $(this).addClass('$class-state-down'); })\n";
 $calCode .= "		.mouseup( function(){ $(this).removeClass('$class-state-down'); })\n";
 $calCode .= "		.hover( function(){ $(this).addClass('$class-state-hover'); },\n";
 $calCode .= "			function(){ $(this).removeClass('$class-state-hover').removeClass('$class-state-down'); }\n";
 $calCode .= "		);\n";
-$calCode .= "	jQuery(\"#gcalendar_component_date_picker\").datepicker({\n";
+$calCode .= "	gcjQuery(\"#gcalendar_component_date_picker\").datepicker({\n";
 $calCode .= "		dateFormat: 'dd-mm-yy',\n";
 $calCode .= "		changeYear: true, \n";
 $calCode .= "		dayNames: ".$daysLong.",\n";
@@ -262,12 +262,12 @@ $calCode .= "		dayNamesMin: ".$daysMin.",\n";
 $calCode .= "		monthNames: ".$monthsLong.",\n";
 $calCode .= "		monthNamesShort: ".$monthsShort.",\n";
 $calCode .= "		onSelect: function(dateText, inst) {\n";
-$calCode .= "			var d = jQuery('#gcalendar_component_date_picker').datepicker('getDate');\n";
-$calCode .= "			var view = jQuery('#gcalendar_component').fullCalendar('getView').name;\n";
-$calCode .= "			jQuery('#gcalendar_component').fullCalendar('gotoDate', d);\n";
+$calCode .= "			var d = gcjQuery('#gcalendar_component_date_picker').datepicker('getDate');\n";
+$calCode .= "			var view = gcjQuery('#gcalendar_component').fullCalendar('getView').name;\n";
+$calCode .= "			gcjQuery('#gcalendar_component').fullCalendar('gotoDate', d);\n";
 $calCode .= "		}\n";
 $calCode .= "	});\n";
-$calCode .= "	jQuery(window).bind( 'hashchange', function(){\n";
+$calCode .= "	gcjQuery(window).bind( 'hashchange', function(){\n";
 $calCode .= "		var today = new Date();\n";
 $calCode .= "		var tmpYear = today.getFullYear();\n";
 $calCode .= "		var tmpMonth = today.getMonth();\n";
@@ -281,19 +281,19 @@ $calCode .= "			if(vars[i].match(\"^day\"))tmpDay = vars[i].substring(4);\n";
 $calCode .= "			if(vars[i].match(\"^view\"))tmpView = vars[i].substring(5);\n";
 $calCode .= "		}\n";
 $calCode .= "		var date = new Date(tmpYear, tmpMonth, tmpDay,0,0,0);\n";
-$calCode .= "		var d = jQuery('#gcalendar_component').fullCalendar('getDate');\n";
-$calCode .= "		var view = jQuery('#gcalendar_component').fullCalendar('getView');\n";
+$calCode .= "		var d = gcjQuery('#gcalendar_component').fullCalendar('getDate');\n";
+$calCode .= "		var view = gcjQuery('#gcalendar_component').fullCalendar('getView');\n";
 $calCode .= "		if(date.getFullYear() != d.getFullYear() || date.getMonth() != d.getMonth() || date.getDate() != d.getDate())\n";
-$calCode .= "			jQuery('#gcalendar_component').fullCalendar('gotoDate', date);\n";
+$calCode .= "			gcjQuery('#gcalendar_component').fullCalendar('gotoDate', date);\n";
 $calCode .= "		if(view.name != tmpView)\n";
-$calCode .= "			jQuery('#gcalendar_component').fullCalendar('changeView', tmpView);\n";
+$calCode .= "			gcjQuery('#gcalendar_component').fullCalendar('changeView', tmpView);\n";
 $calCode .= "	});\n";
-$calCode .= "	jQuery('.ui-widget-overlay').live('click', function() { jQuery('#gcalendar-dialog').dialog('close'); });\n";
+$calCode .= "	gcjQuery('.ui-widget-overlay').live('click', function() { gcjQuery('#gcalendar-dialog').dialog('close'); });\n";
 if($params->get('show_selection', 1) == 1) {
-	$calCode .= "jQuery('#gc_gcalendar_view_list').hide();\n";
+	$calCode .= "gcjQuery('#gc_gcalendar_view_list').hide();\n";
 }
 $calCode .= "});\n";
-$calCode .= "var dayClickCustom = function(date, allDay, jsEvent, view){jQuery('#gcalendar_component').fullCalendar('gotoDate', date).fullCalendar('changeView', 'agendaDay');}\n";
+$calCode .= "var dayClickCustom = function(date, allDay, jsEvent, view){gcjQuery('#gcalendar_component').fullCalendar('gotoDate', date).fullCalendar('changeView', 'agendaDay');}\n";
 $calCode .= "var eventDropCustom = function(event, dayDelta, minuteDelta, allDay, revertFunc, jsEvent, ui, view){};\n";
 $calCode .= "var eventResizeCustom = function(event, dayDelta, minuteDelta, revertFunc, jsEvent, ui, view){};\n";
 $calCode .= "// ]]>\n";

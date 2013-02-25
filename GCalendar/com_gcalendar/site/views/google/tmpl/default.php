@@ -21,6 +21,8 @@
 
 defined('_JEXEC') or die();
 
+GCalendarUtil::loadjQuery();
+
 $component = JComponentHelper::getComponent('com_gcalendar');
 $menu = JFactory::getApplication()->getMenu();
 $items = $menu->getItems('component_id', $component->id);
@@ -107,7 +109,7 @@ if($params->get('show_selection')==1 || $params->get('show_selection') == 3){
 	$document->addScript(JURI::base(). 'components/com_gcalendar/views/google/tmpl/gcalendar.js' );
 	$document->addStyleSheet(JURI::base().'components/com_gcalendar/views/google/tmpl/gcalendar.css');
 	if($params->get('show_selection', 1) == 1) {
-		$document->addScriptDeclaration("jQuery(document).ready(function() {jQuery('#gc_google_view_list').hide();});");
+		$document->addScriptDeclaration("gcjQuery(document).ready(function() {gcjQuery('#gc_google_view_list').hide();});");
 	}
 	echo $calendar_list;
 	echo "<div align=\"center\" style=\"text-align:center\">\n";
