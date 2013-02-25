@@ -27,6 +27,7 @@ if (!defined('DS')) {
 
 JLoader::import('components.com_gcalendar.dbutil', JPATH_ADMINISTRATOR);
 JLoader::import('components.com_gcalendar.libraries.GCalendar.GCalendarZendHelper', JPATH_ADMINISTRATOR);
+JLoader::import('joomla.environment.browser');
 
 if (!class_exists('Mustache')) {
 	JLoader::import('components.com_gcalendar.libraries.mustache.Mustache', JPATH_ADMINISTRATOR);

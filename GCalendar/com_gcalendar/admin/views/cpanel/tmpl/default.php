@@ -21,7 +21,6 @@
 
 defined('_JEXEC') or die();
 
-JLoader::import('joomla.environment.browser');
 GCalendarUtil::loadjQuery();
 ?>
 <div style="width:500px;">
