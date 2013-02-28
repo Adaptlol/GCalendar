@@ -29,10 +29,10 @@ supports a smooth integration of your google calendar.</p>
 <h4>GCalendar Action Pack</h4>
 <p>
 Do you want to <b>edit</b> your google events from within joomla consider the to buy the
-<a href="http://g4j.laoneo.net/extensions/gcalendar-action-pack.html" target="_blank">
+<a href="http://g4j.digital-peak.com/extensions/gcalendar-action-pack.html" target="_blank">
 GCalendar Action Pack</a>.
 </p>
-<img src="http://g4j.laoneo.net/images/gcalendarap/features/edit-event.png" width="430" height="330" alt="edit-event">
+<img src="http://g4j.digital-peak.com/images/gcalendarap/features/edit-event.png" width="430" height="330" alt="edit-event">
 
 <h4>Documentation and Support</h4>
 <p>
