@@ -242,7 +242,7 @@ $calCode .= "			'</span></a>'+\n";
 $calCode .= "			'</span></span></span>';\n";
 $calCode .= "		custom_buttons +='<span class=\"fc-button fc-button-print ".$class."-state-default ".$class."-corner-left ".$class."-corner-right\">'+\n";
 $calCode .= "			'<span class=\"fc-button-inner\"><span class=\"fc-button-content\">'+\n";
-$calCode .= "			'<a onClick=\"print_view();\"><span class=\"".$class."-icon ".$class."-icon-print\">".JText::_('COM_GCALENDAR_GCALENDAR_VIEW_TOOLBAR_PRINT')."'+\n";
+$calCode .= "			'<a onClick=\"printView();\"><span class=\"".$class."-icon ".$class."-icon-print\">".JText::_('COM_GCALENDAR_GCALENDAR_VIEW_TOOLBAR_PRINT')."'+\n";
 $calCode .= "			'</span></a>'+\n";
 $calCode .= "			'</span></span></span>';\n";
 $calCode .= "	gcjQuery('span.fc-button-today').after(custom_buttons);\n";
@@ -333,19 +333,3 @@ $dispatcher->trigger('onGCCalendarLoad', array('gcalendar_component'));
 
 if(!JFile::exists(JPATH_ADMINISTRATOR.DS.'components'.DS.'com_gcalendarap'.DS.'gcalendarap.php'))
 	echo "<div style=\"text-align:center;margin-top:10px\" ><a href=\"http://g4j.digital-peak.com\">GCalendar</a></div>\n";
-
-//hide buttons and tune CSS for printable format
-if (JRequest::getVar('tmpl') == 'component'){
-	$document->addStyleSheet(JURI::base().'components/com_gcalendar/libraries/fullcalendar/fullcalendar.print.css', 'text/css', 'print');
-	$document->addStyleDeclaration('.fc-header-left, .fc-header-right { display:none; }');
-	$document->addStyleDeclaration('@page {size: A4 landscape;}');
-} else {
-	$document->addStyleDeclaration('@page {size: A4 landscape;}');
-	$document->addScriptDeclaration('function print_view() {
-					var loc=document.location.href.replace(/\?/,"\?tmpl=component\&");
-					if (loc==document.location.href)
-						loc=document.location.href.replace(/#/,"\?tmpl=component#");
-					var printWindow = window.open(loc);
-					printWindow.focus();
-				}');
-}

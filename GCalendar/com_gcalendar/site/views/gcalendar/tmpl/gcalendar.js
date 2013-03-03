@@ -22,3 +22,11 @@ function updateGCalendarFrame(calendar) {
 		gcjQuery('#gcalendar_component').fullCalendar('removeEventSource', calendar.value);
 	}
 }
+
+function printView() {
+	var loc=document.location.href.replace(/\?/,"\?layout=print&format=raw\&");
+	if (loc==document.location.href)
+		loc=document.location.href.replace(/#/,"\?layout=print&format=raw#");
+	var printWindow = window.open(loc);
+	printWindow.focus();
+}
