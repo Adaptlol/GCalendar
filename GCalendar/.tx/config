@@ -80,14 +80,3 @@ file_filter = plg_search_gcalendar\language\<lang>\<lang>.plg_search_gcalendar.s
 source_file = plg_search_gcalendar\language\en-GB\en-GB.plg_search_gcalendar.sys.ini
 source_lang = en_GB
 minimum_perc = 80
-[GCalendar.plg_system_gcalendar]
-file_filter = plg_system_gcalendar\language\<lang>\<lang>.plg_system_gcalendar.ini
-source_file = plg_system_gcalendar\language\en-GB\en-GB.plg_system_gcalendar.ini
-source_lang = en_GB
-minimum_perc = 80
-
-[GCalendar.plg_system_gcalendar-sys]
-file_filter = plg_system_gcalendar\language\<lang>\<lang>.plg_system_gcalendar.sys.ini
-source_file = plg_system_gcalendar\language\en-GB\en-GB.plg_system_gcalendar.sys.ini
-source_lang = en_GB
-minimum_perc = 80
