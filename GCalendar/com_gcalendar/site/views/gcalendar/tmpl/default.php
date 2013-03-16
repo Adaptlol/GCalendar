@@ -38,6 +38,7 @@ $document->addStyleSheet(JURI::base().'components/com_gcalendar/libraries/jquery
 $document->addStyleSheet(JURI::base().'components/com_gcalendar/libraries/jquery/ext/tipTip.css');
 $document->addStyleDeclaration("#ui-datepicker-div { z-index: 15 !important; }");
 $document->addStyleSheet(JURI::base().'components/com_gcalendar/views/gcalendar/tmpl/gcalendar.css');
+$document->addScript(JURI::base().'components/com_gcalendar/views/gcalendar/tmpl/gcalendar.js');
 
 $params = $this->params;
 
@@ -301,7 +302,6 @@ $document->addScriptDeclaration($calCode);
 
 echo JHTML::_('content.prepare', $params->get('textbefore'));
 if($params->get('show_selection', 1) == 1 || $params->get('show_selection', 1) == 3){
-	$document->addScript(JURI::base(). 'components/com_gcalendar/views/gcalendar/tmpl/gcalendar.js' );
 	$calendar_list = '<div id="gc_gcalendar_view_list"><table class="gcalendar-table">';
 	foreach($allCalendars as $calendar) {
 		$value = html_entity_decode(JRoute::_('index.php?option=com_gcalendar&view=jsonfeed&format=raw&gcid='.$calendar->id));
