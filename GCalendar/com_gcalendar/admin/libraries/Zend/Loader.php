@@ -1,4 +1,5 @@
 <?php
+if(class_exists('Zend_Loader')) return;
 /**
  * Zend Framework
  *
