@@ -21,7 +21,7 @@
 
 defined('_JEXEC') or die();
 
-class GCalendarZendHelper{
+class GCalendarZendHelper {
 
 	const SORT_ORDER_ASC = 'ascending';
 	const SORT_ORDER_DESC = 'descending';
@@ -35,8 +35,8 @@ class GCalendarZendHelper{
 	 *
 	 * @return Zend_Gdata_Calendar_ListFeed|NULL
 	 */
-	public static function getCalendars($username, $password){
-		try{
+	public static function getCalendars($username, $password) {
+		try {
 			$client = Zend_Gdata_ClientLogin::getHttpClient($username, $password, Zend_Gdata_Calendar::AUTH_SERVICE_NAME);
 
 			$gdataCal = new Zend_Gdata_Calendar($client);
@@ -59,7 +59,7 @@ class GCalendarZendHelper{
 	 *
 	 * @return Zend_Gdata_App_Feed|NULL
 	 */
-	public static function getEvents($calendar, $startDate = null, $endDate = null, $max = 1000, $filter = null, $orderBy = GCalendarZendHelper::ORDER_BY_START_TIME, $pastEvents = false, $sortOrder = GCalendarZendHelper::SORT_ORDER_ASC, $startIndex = 1){
+	public static function getEvents($calendar, $startDate = null, $endDate = null, $max = 1000, $filter = null, $orderBy = GCalendarZendHelper::ORDER_BY_START_TIME, $pastEvents = false, $sortOrder = GCalendarZendHelper::SORT_ORDER_ASC, $startIndex = 1) {
 		// Implement View Level Access
 		$user = JFactory::getUser();
 		if (!$user->authorise('core.admin') && !in_array($calendar->access, $user->getAuthorisedViewLevels())) {
@@ -70,7 +70,7 @@ class GCalendarZendHelper{
 		$cache->setCaching(GCalendarUtil::getComponentParameter('gc_cache', 1) == '1');
 		if(GCalendarUtil::getComponentParameter('gc_cache', 1) == 2){
 			$conf = JFactory::getConfig();
-			$cache->setCaching($conf->getValue( 'config.caching' ));
+			$cache->setCaching($conf->get('config.caching'));
 		}
 		$cache->setLifeTime(GCalendarUtil::getComponentParameter('gc_cache_time', 900));
 
@@ -105,7 +105,7 @@ class GCalendarZendHelper{
 	 *
 	 * @return Zend_Gdata_App_Entry|NULL
 	 */
-	public static function getEvent($calendar, $eventId){
+	public static function getEvent($calendar, $eventId) {
 		// Implement View Level Access
 		$user = JFactory::getUser();
 		if (!$user->authorise('core.admin') && !in_array($calendar->access, $user->getAuthorisedViewLevels())) {
@@ -116,7 +116,7 @@ class GCalendarZendHelper{
 		$cache->setCaching(GCalendarUtil::getComponentParameter('gc_cache', 1) == '1');
 		if(GCalendarUtil::getComponentParameter('gc_cache', 1) == 2){
 			$conf = JFactory::getConfig();
-			$cache->setCaching($conf->getValue('config.caching'));
+			$cache->setCaching($conf->get('config.caching'));
 		}
 		$cache->setLifeTime(GCalendarUtil::getComponentParameter('gc_cache_time', 900));
 
@@ -199,7 +199,7 @@ class GCalendarZendHelper{
 	/**
 	 * @return Zend_Gdata_App_Entry|NULL
 	 */
-	public static function internalGetEvent($calendar, $eventId){
+	public static function internalGetEvent($calendar, $eventId) {
 		try {
 			$client = new Zend_Http_Client();
 
