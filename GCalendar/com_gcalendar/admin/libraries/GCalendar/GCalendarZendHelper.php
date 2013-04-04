@@ -85,6 +85,7 @@ class GCalendarZendHelper {
 		$tmp->name = $calendar->name;
 
 		$events = $cache->call(array('GCalendarZendHelper', 'internalGetEvents'), $tmp, $startDate, $endDate, $max, $filter, $orderBy, $pastEvents, $sortOrder, $startIndex);
+		$cache->gc();
 
 		// Implement View Level Access
 		$user = JFactory::getUser();
@@ -131,6 +132,7 @@ class GCalendarZendHelper {
 		$tmp->name = $calendar->name;
 
 		$event =  $cache->call(array('GCalendarZendHelper', 'internalGetEvent'), $tmp, $eventId);
+		$cache->gc();
 
 		// Implement View Level Access
 		$user = JFactory::getUser();
