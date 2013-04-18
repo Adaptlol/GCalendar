@@ -94,7 +94,7 @@ gcjQuery(document).ready(function() {
 		    live: true,
 		    behavior: 'all'
 		  }
-	}).render().setUser('g4joomla').start();
+	}).render().setUser('digitpeak').start();
 });
 </script>
 
