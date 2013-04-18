@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <extension type="component" version="2.5" method="upgrade">
 	<name>COM_GCALENDAR</name>
-	<creationDate>Mar 2013</creationDate>
+	<creationDate>Apr 2013</creationDate>
 	<author>G4J Project</author>
 	<authorEmail>info@digital-peak.com</authorEmail>
 	<authorUrl>g4j.digital-peak.com</authorUrl>
