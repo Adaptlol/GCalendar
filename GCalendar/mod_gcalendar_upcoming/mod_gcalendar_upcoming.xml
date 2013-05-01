@@ -3,7 +3,7 @@
 	client="site">
 	<name>MOD_GCALENDAR_UPCOMING</name>
 	<author>G4J Project</author>
-	<creationDate>Apr 2013</creationDate>
+	<creationDate>May 2013</creationDate>
 	<copyright>This extension is released under the GNU/GPL License.
 	</copyright>
 	<license>http://www.gnu.org/copyleft/gpl.html
@@ -11,7 +11,7 @@
 	<authorEmail>info@digital-peak.com
 	</authorEmail>
 	<authorUrl>g4j.digital-peak.com</authorUrl>
-	<version>3.0.1</version>
+	<version>3.0.2</version>
 	<description>MOD_GCALENDAR_UPCOMING_XML_DESCRIPTION</description>
 	<files>
 		<filename module="mod_gcalendar_upcoming">mod_gcalendar_upcoming.php
