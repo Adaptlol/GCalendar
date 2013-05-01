@@ -215,7 +215,7 @@ if($params->get('show_event_as_popup', 1) == 1){
 	$calCode .= "			if (event.description){\n";
 	$calCode .= "				element.tipTip({content: event.description, defaultPosition: 'top'});}\n";
 	$calCode .= "		},\n";
-	$calCode .= "		eventClick: function(event) {dpjQuery('#tiptip_holder').hide(); if (event.url) {return false;}},\n";
+	$calCode .= "		eventClick: function(event) {gcjQuery('#tiptip_holder').hide(); if (event.url) {return false;}},\n";
 }
 $calCode .= "		dayClick: function(date, allDay, jsEvent, view) {\n";
 $calCode .= "			dayClickCustom(date, allDay, jsEvent, view);\n";
