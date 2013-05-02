@@ -323,7 +323,7 @@ if($params->get('show_selection', 1) == 1 || $params->get('show_selection', 1) =
 	echo "</div>\n";
 }
 
-echo "<div id='gcalendar_component_loading' style=\"text-align: center;\"><img src=\"".JURI::base() . "media/com_gcalendar/images/ajax-loader.gif\"  alt=\"loader\" /></div>";
+echo "<div id='gcalendar_component_loading' style=\"text-align: center;".(empty($this->items) ? 'visibility:hidden' : '')."\"><img src=\"".JURI::base() . "media/com_gcalendar/images/ajax-loader.gif\"  alt=\"loader\" /></div>";
 echo "<div id='gcalendar_component'></div><div id='gcalendar_component_popup' style=\"visibility:hidden\" ></div>";
 echo JHTML::_('content.prepare', $params->get('textafter'));
 
