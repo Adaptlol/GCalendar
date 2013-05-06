@@ -44,11 +44,16 @@
 			<option value="6">COM_GCALENDAR_FIELD_CONFIG_CALENDAR_WEEK_START_SATURDAY</option>
 		</field>
 		<field name="weekend" type="radio" default="1" 
-               label="COM_GCALENDAR_FIELD_CONFIG_CALENDAR_SHOW_WEEKEND_LABEL" description="COM_GCALENDAR_FIELD_CONFIG_CALENDAR_SHOW_WEEKEND_DESC"> 
-               <option value="1">JYES</option> 
-               <option value="0">JNO</option> 
-           </field>
-           <field name="calendar_height" type="text" size="50" default="0"
+            label="COM_GCALENDAR_FIELD_CONFIG_CALENDAR_SHOW_WEEKEND_LABEL" description="COM_GCALENDAR_FIELD_CONFIG_CALENDAR_SHOW_WEEKEND_DESC"> 
+            <option value="1">JYES</option> 
+            <option value="0">JNO</option> 
+        </field>
+		<field name="week_numbers" type="radio" default="0" 
+            label="COM_GCALENDAR_FIELD_CONFIG_CALENDAR_SHOW_WEEK_NUMBER_LABEL" description="COM_GCALENDAR_FIELD_CONFIG_CALENDAR_SHOW_WEEK_NUMBER_DESC"> 
+            <option value="1">JYES</option> 
+            <option value="0">JNO</option> 
+        </field>
+        <field name="calendar_height" type="text" size="50" default="0"
 			label="COM_GCALENDAR_FIELD_CONFIG_CALENDAR_CALENDAR_LABEL"
 			description="COM_GCALENDAR_FIELD_CONFIG_CALENDAR_CALENDAR_DESC" />
 		<field name="titleformat_month" type="text" default="F Y" label="COM_GCALENDAR_FIELD_CONFIG_CALENDAR_TITLE_FORMAT_MONTH_LABEL"

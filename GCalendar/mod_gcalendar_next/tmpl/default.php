@@ -26,7 +26,7 @@ if(!empty($error)){
 	return;
 }
 
-GCalendarUtil::loadjQuery();
+GCalendarUtil::loadLibrary();
 
 $data = array();
 $now = false;

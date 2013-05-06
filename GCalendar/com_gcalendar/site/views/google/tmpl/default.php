@@ -21,7 +21,7 @@
 
 defined('_JEXEC') or die();
 
-GCalendarUtil::loadjQuery();
+GCalendarUtil::loadLibrary();
 
 $component = JComponentHelper::getComponent('com_gcalendar');
 $menu = JFactory::getApplication()->getMenu();

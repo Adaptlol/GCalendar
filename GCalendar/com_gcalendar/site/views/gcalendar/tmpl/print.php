@@ -229,7 +229,7 @@ if ($params->get('show_page_heading', 1)) { ?>
 
 echo JHTML::_('content.prepare', $params->get('textbefore'));
 if($params->get('show_selection', 1) == 1 || $params->get('show_selection', 1) == 3){
-	$calendar_list = '<div id="gc_gcalendar_view_list"><table class="gcalendar-table">';
+	$calendar_list = '<div id="gcalendar_view_list"><table class="gcalendar-table">';
 	foreach($allCalendars as $calendar) {
 		$value = html_entity_decode(JRoute::_('index.php?option=com_gcalendar&view=jsonfeed&format=raw&gcid='.$calendar->id));
 		$checked = '';

@@ -21,7 +21,7 @@
 
 defined('_JEXEC') or die();
 
-GCalendarUtil::loadjQuery();
+GCalendarUtil::loadLibrary();
 
 $document = JFactory::getDocument();
 $document->addScript(JURI::base().'components/com_gcalendar/libraries/jquery/ui/jquery-ui.custom.min.js');

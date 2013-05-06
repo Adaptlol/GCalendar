@@ -21,7 +21,7 @@
 
 defined('_JEXEC') or die();
 
-GCalendarUtil::loadjQuery();
+GCalendarUtil::loadLibrary();
 
 JHtml::_('behavior.tooltip');
 JHtml::_('behavior.formvalidation');

@@ -21,7 +21,7 @@
 
 defined('_JEXEC') or die();
 
-GCalendarUtil::loadjQuery();
+GCalendarUtil::loadLibrary();
 
 $dispatcher = JDispatcher::getInstance();
 JPluginHelper::importPlugin('gcalendar');

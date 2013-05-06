@@ -373,17 +373,83 @@ class GCalendarUtil {
 		return substr($j->RELEASE, 0, strlen($version)) == $version;
 	}
 
-	public static function loadjQuery() {
+	public static function loadLibrary($libraries = array('jquery' => true)) {
 		if (JFactory::getDocument()->getType() != 'html') {
 			return ;
 		}
 
+		$document = JFactory::getDocument();
 		if (self::isJoomlaVersion('2.5')) {
-			JFactory::getDocument()->addScript(JURI::root().'components/com_gcalendar/libraries/jquery/jquery.min.js');
+			if (isset($libraries['jquery'])) {
+				if (!JFactory::getApplication()->get('jquery', false)) {
+					JFactory::getApplication()->set('jquery', true);
+					$document->addScript(JURI::root().'components/com_gcalendar/libraries/jquery/jquery.min.js');
+				}
+				$document->addScript(JURI::root().'components/com_gcalendar/libraries/jquery/gcalendar/gcNoConflict.js');
+			}
+
+			if (isset($libraries['jqueryui'])) {
+				$theme = 'bootstrap';
+				if (is_string($libraries['jqueryui']) && !empty($libraries['jqueryui']) && $libraries['jqueryui'] != -1) {
+					$theme = $libraries['jqueryui'];
+				}
+				if ($theme == 'bootstrap') {
+					$libraries['bootstrap'] = true;
+				}
+				$document->addStyleSheet(JURI::root().'components/com_gcalendar/libraries/jquery/themes/'.$theme.'/jquery-ui.custom.css');
+				$document->addScript(JURI::root().'components/com_gcalendar/libraries/jquery/ui/jquery-ui.custom.min.js');
+			}
+
+			if (isset($libraries['bootstrap'])) {
+				$document->addStyleSheet(JURI::root().'components/com_gcalendar/libraries/bootstrap/css/bootstrap.min.css');
+				if ($libraries['bootstrap'] == 'javscript') {
+					$document->addScript(JURI::root().'components/com_gcalendar/libraries/bootstrap/js/bootstrap.min.js');
+				}
+			}
+
+			if (isset($libraries['chosen'])) {
+				$document->addScript(JURI::root().'components/com_gcalendar/libraries/jquery/ext/jquery.chosen.min.js');
+				$document->addStyleSheet(JURI::root().'components/com_gcalendar/libraries/jquery/ext/jquery.chosen.css');
+			}
 		} else {
-			JHtml::_('jquery.framework');
+			if (isset($libraries['jquery'])) {
+				JHtml::_('jquery.framework');
+				$document->addScript(JURI::root().'components/com_gcalendar/libraries/jquery/gcalendar/gcNoConflict.js');
+			}
+
+			if (isset($libraries['jqueryui'])) {
+				$theme = 'bootstrap';
+				if (is_string($libraries['jqueryui']) && !empty($theme) && $theme == -1) {
+					$theme = $libraries['jqueryui'];
+				} else {
+					$libraries['bootstrap'] = true;
+				}
+				$document->addStyleSheet(JURI::root().'components/com_gcalendar/libraries/jquery/themes/'.$theme.'/jquery-ui.custom.css');
+				$document->addScript(JURI::root().'components/com_gcalendar/libraries/jquery/ui/jquery-ui.custom.min.js');
+			}
+
+			if (isset($libraries['bootstrap'])) {
+				JHtml::_('bootstrap.framework');
+			}
+
+			if (isset($libraries['chosen'])) {
+				JHtml::_('formbehavior.chosen', 'select');
+			}
 		}
-		JFactory::getDocument()->addScript(JURI::root().'components/com_gcalendar/libraries/jquery/gcalendar/gcNoConflict.js');
+
+		if (isset($libraries['gcalendar'])) {
+			$document->addScript(JURI::root().'administrator/components/com_gcalendar/libraries/GCalendar/gcalendar.js');
+			$document->addStyleSheet(JURI::root().'administrator/components/com_gcalendar/libraries/GCalendar/gcalendar.css');
+		}
+
+		if (isset($libraries['fullcalendar'])) {
+			$document->addScript(JURI::root().'components/com_gcalendar/libraries/fullcalendar/fullcalendar.js');
+			$document->addStyleSheet(JURI::root().'components/com_gcalendar/libraries/fullcalendar/fullcalendar.css');
+			$document->addScript(JURI::root().'components/com_gcalendar/libraries/jquery/gcalendar/jquery.gcalendar-all.min.js');
+			$document->addStyleSheet(JURI::root().'components/com_gcalendar/libraries/jquery/fancybox/jquery.fancybox-1.3.4.css');
+			$document->addStyleSheet(JURI::root().'components/com_gcalendar/libraries/jquery/ext/tipTip.css');
+			$document->addScript(JURI::root().'components/com_gcalendar/libraries/jquery/ext/jquery.tipTip.minified.js');
+		}
 	}
 
 	public static function sendMessage($message, $error = false, array $data = array()) {
