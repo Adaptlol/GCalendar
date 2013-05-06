@@ -443,7 +443,7 @@ class GCalendarUtil {
 		}
 
 		if (isset($libraries['fullcalendar'])) {
-			$document->addScript(JURI::root().'components/com_gcalendar/libraries/fullcalendar/fullcalendar.js');
+			$document->addScript(JURI::root().'components/com_gcalendar/libraries/fullcalendar/fullcalendar.min.js');
 			$document->addStyleSheet(JURI::root().'components/com_gcalendar/libraries/fullcalendar/fullcalendar.css');
 			$document->addScript(JURI::root().'components/com_gcalendar/libraries/jquery/gcalendar/jquery.gcalendar-all.min.js');
 			$document->addStyleSheet(JURI::root().'components/com_gcalendar/libraries/jquery/fancybox/jquery.fancybox-1.3.4.css');
