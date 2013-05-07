@@ -189,6 +189,8 @@ class GCalendarUtil {
 				$variables['month'] = strtoupper($event->getStartDate()->format('M', true));
 				$variables['day'] = $event->getStartDate()->format('j', true);
 				$variables['year'] = strtoupper($event->getStartDate()->format('Y', true));
+				$variables['dayNameShort'] = $event->getStartDate()->format('D', true);
+				$variables['dayNameLong'] = $event->getStartDate()->format('l', true);
 			}
 			$variables['modifieddate'] = $event->getModifiedDate()->format($timeformat, true).' '.$event->getModifiedDate()->format($dateformat, true);
 
