@@ -95,12 +95,6 @@ $calCode .= "		dayNamesShort: ".$daysShort.",\n";
 $calCode .= "		timeFormat: { \n";
 $calCode .= "		        month: '".Fullcalendar::convertFromPHPDate($params->get('timeformat_month', 'g:i a'))."'},\n";
 $calCode .= "		columnFormat: { month: 'ddd', week: 'ddd d', day: 'dddd d'},\n";
-$calCode .= "		buttonText: {\n";
-$calCode .= "		    prev:     '&nbsp;&#9668;&nbsp;',\n";  // left triangle
-$calCode .= "		    next:     '&nbsp;&#9658;&nbsp;',\n";  // right triangle
-$calCode .= "		    prevYear: '&nbsp;&lt;&lt;&nbsp;',\n"; // <<
-$calCode .= "		    nextYear: '&nbsp;&gt;&gt;&nbsp;'\n"; // >>
-$calCode .= "		},\n";
 $calCode .= "		eventRender: function(event, element) {\n";
 $calCode .= "			event.editable = false;\n";
 $calCode .= "			if (event.description){\n";
