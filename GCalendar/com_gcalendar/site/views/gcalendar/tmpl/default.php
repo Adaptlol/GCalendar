@@ -66,9 +66,9 @@ $daysMin = "[";
 $monthsLong = "[";
 $monthsShort = "[";
 for ($i=0; $i<7; $i++) {
-	$daysLong .= "'".htmlspecialchars(GCalendarUtil::dayToString($i, false), ENT_QUOTES)."'";
-	$daysShort .= "'".htmlspecialchars(GCalendarUtil::dayToString($i, true), ENT_QUOTES)."'";
-	$daysMin .= "'".htmlspecialchars(mb_substr(GCalendarUtil::dayToString($i, true), 0, 2), ENT_QUOTES)."'";
+	$daysLong .= "'".GCalendarUtil::dayToString($i, false)."'";
+	$daysShort .= "'".GCalendarUtil::dayToString($i, true)."'";
+	$daysMin .= "'".mb_substr(GCalendarUtil::dayToString($i, true), 0, 2)."'";
 	if($i < 6){
 		$daysLong .= ",";
 		$daysShort .= ",";
@@ -76,8 +76,8 @@ for ($i=0; $i<7; $i++) {
 	}
 }
 for ($i=1; $i<=12; $i++) {
-	$monthsLong .= "'".htmlspecialchars(GCalendarUtil::monthToString($i, false), ENT_QUOTES)."'";
-	$monthsShort .= "'".htmlspecialchars(GCalendarUtil::monthToString($i, true), ENT_QUOTES)."'";
+	$monthsLong .= "'".GCalendarUtil::monthToString($i, false)."'";
+	$monthsShort .= "'".GCalendarUtil::monthToString($i, true)."'";
 	if($i < 12){
 		$monthsLong .= ",";
 		$monthsShort .= ",";
@@ -142,28 +142,28 @@ $calCode .= "			day: '".Fullcalendar::convertFromPHPDate($params->get('timeforma
 $calCode .= "			list: '".Fullcalendar::convertFromPHPDate($params->get('timeformat_list', 'g:i a{ - g:i a}'))."'},\n";
 $calCode .= "		columnFormat: { month: 'ddd', week: 'ddd d', day: 'dddd d'},\n";
 $calCode .= "		axisFormat: '".Fullcalendar::convertFromPHPDate($params->get('axisformat', 'g:i a'))."',\n";
-$calCode .= "		allDayText: '".htmlspecialchars(JText::_('COM_GCALENDAR_GCALENDAR_VIEW_ALL_DAY'), ENT_QUOTES)."',\n";
+$calCode .= "		allDayText: '".JText::_('COM_GCALENDAR_GCALENDAR_VIEW_ALL_DAY', true)."',\n";
 $calCode .= "		buttonText: {\n";
-$calCode .= "			today:    '".htmlspecialchars(JText::_('COM_GCALENDAR_GCALENDAR_VIEW_TOOLBAR_TODAY'), ENT_QUOTES)."',\n";
-$calCode .= "			month:    '".htmlspecialchars(JText::_('COM_GCALENDAR_GCALENDAR_VIEW_VIEW_MONTH'), ENT_QUOTES)."',\n";
-$calCode .= "			week:     '".htmlspecialchars(JText::_('COM_GCALENDAR_GCALENDAR_VIEW_VIEW_WEEK'), ENT_QUOTES)."',\n";
-$calCode .= "			day:      '".htmlspecialchars(JText::_('COM_GCALENDAR_GCALENDAR_VIEW_VIEW_DAY'), ENT_QUOTES)."',\n";
-$calCode .= "			list:      '".htmlspecialchars(JText::_('COM_GCALENDAR_GCALENDAR_VIEW_VIEW_LIST'), ENT_QUOTES)."'\n";
+$calCode .= "			today:    '".JText::_('COM_GCALENDAR_GCALENDAR_VIEW_TOOLBAR_TODAY', true)."',\n";
+$calCode .= "			month:    '".JText::_('COM_GCALENDAR_GCALENDAR_VIEW_VIEW_MONTH', true)."',\n";
+$calCode .= "			week:     '".JText::_('COM_GCALENDAR_GCALENDAR_VIEW_VIEW_WEEK', true)."',\n";
+$calCode .= "			day:      '".JText::_('COM_GCALENDAR_GCALENDAR_VIEW_VIEW_DAY', true)."',\n";
+$calCode .= "			list:      '".JText::_('COM_GCALENDAR_GCALENDAR_VIEW_VIEW_LIST', true)."'\n";
 $calCode .= "		},\n";
 $calCode .= "		listSections: 'smart',\n";
 $calCode .= "		listRange: 30,\n";
 $calCode .= "		listPage: 30,\n";
 $calCode .= "		listTexts: {
-						until: '".htmlspecialchars(JText::_('COM_GCALENDAR_GCALENDAR_VIEW_TEXTS_UNTIL'), ENT_QUOTES)."',
-						past: '".htmlspecialchars(JText::_('COM_GCALENDAR_GCALENDAR_VIEW_TEXTS_PAST'), ENT_QUOTES)."',
-						today: '".htmlspecialchars(JText::_('COM_GCALENDAR_GCALENDAR_VIEW_TEXTS_TODAY'), ENT_QUOTES)."',
-						tomorrow: '".htmlspecialchars(JText::_('COM_GCALENDAR_GCALENDAR_VIEW_TEXTS_TOMORROW'), ENT_QUOTES)."',
-						thisWeek: '".htmlspecialchars(JText::_('COM_GCALENDAR_GCALENDAR_VIEW_TEXTS_THIS_WEEK'), ENT_QUOTES)."',
-						nextWeek: '".htmlspecialchars(JText::_('COM_GCALENDAR_GCALENDAR_VIEW_TEXTS_NEXT_WEEK'), ENT_QUOTES)."',
-						thisMonth: '".htmlspecialchars(JText::_('COM_GCALENDAR_GCALENDAR_VIEW_TEXTS_THIS_MONTH'), ENT_QUOTES)."',
-						nextMonth: '".htmlspecialchars(JText::_('COM_GCALENDAR_GCALENDAR_VIEW_TEXTS_NEXT_MONTH'), ENT_QUOTES)."',
-						future: '".htmlspecialchars(JText::_('COM_GCALENDAR_GCALENDAR_VIEW_TEXTS_FUTURE'), ENT_QUOTES)."',
-						week: '".htmlspecialchars(JText::_('COM_GCALENDAR_GCALENDAR_VIEW_TEXTS_WEEK'), ENT_QUOTES)."'
+						until: '".JText::_('COM_GCALENDAR_GCALENDAR_VIEW_TEXTS_UNTIL', true)."',
+						past: '".JText::_('COM_GCALENDAR_GCALENDAR_VIEW_TEXTS_PAST', true)."',
+						today: '".JText::_('COM_GCALENDAR_GCALENDAR_VIEW_TEXTS_TODAY', true)."',
+						tomorrow: '".JText::_('COM_GCALENDAR_GCALENDAR_VIEW_TEXTS_TOMORROW', true)."',
+						thisWeek: '".JText::_('COM_GCALENDAR_GCALENDAR_VIEW_TEXTS_THIS_WEEK', true)."',
+						nextWeek: '".JText::_('COM_GCALENDAR_GCALENDAR_VIEW_TEXTS_NEXT_WEEK', true)."',
+						thisMonth: '".JText::_('COM_GCALENDAR_GCALENDAR_VIEW_TEXTS_THIS_MONTH', true)."',
+						nextMonth: '".JText::_('COM_GCALENDAR_GCALENDAR_VIEW_TEXTS_NEXT_MONTH', true)."',
+						future: '".JText::_('COM_GCALENDAR_GCALENDAR_VIEW_TEXTS_FUTURE', true)."',
+						week: '".JText::_('COM_GCALENDAR_GCALENDAR_VIEW_TEXTS_WEEK', true)."'
 					},\n";
 $calCode .= $calsSources;
 $calCode .= "		viewDisplay: function(view) {\n";
