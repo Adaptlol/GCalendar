@@ -1,3 +1,22 @@
+gcjQuery(document).ready(function() {
+	var location = gcjQuery('#gc-event-details-location').text();
+	if (!location) {
+		return;
+	}
+	
+	var geocoder = new google.maps.Geocoder();
+	geocoder.geocode( { 'address': location}, function(results, status) {
+        if (status == google.maps.GeocoderStatus.OK) {
+        	var gcalendarMapZoom = gcjQuery('#gc-event-details-map').attr('data-zoom');
+        	if (gcalendarMapZoom == null) {
+        		gcalendarMapZoom = 4;
+        	}
+        	var gcalendarMap = new google.maps.Map(document.getElementById('gc-event-details-map'), {zoom: parseInt(gcalendarMapZoom), mapTypeId: google.maps.MapTypeId.ROADMAP, center: results[0].geometry.location});
+            new google.maps.Marker({map: gcalendarMap, position: results[0].geometry.location, title: location });
+        }
+    });
+});
+
 function sdafgkl437jeeee(a) {
 	RE = /^(.+)\#(.+)$/;
 	var launch = Base64.decode(a).replace(RE, "mail" + "to:$1@$2");

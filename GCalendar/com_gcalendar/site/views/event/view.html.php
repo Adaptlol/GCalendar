@@ -25,6 +25,8 @@ JLoader::import('components.com_gcalendar.libraries.gcalendar.view', JPATH_SITE)
 
 class GCalendarViewEvent extends GCalendarView {
 
+	protected $adapt = false;
+
 	public function init() {
 		$this->event = $this->get('GCalendar');
 	}

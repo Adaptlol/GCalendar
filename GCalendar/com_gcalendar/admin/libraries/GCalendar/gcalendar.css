@@ -12,9 +12,9 @@
 }
 
 /* make facebook comment box width 100% */
-.dpcal-fb-comments-box .fb_iframe_widget,
-.dpcal-fb-comments-box .fb_iframe_widget span,
-.dpcal-fb-comments-box .fb_iframe_widget iframe[style]  {width: 100% !important;}
+.gcal-fb-comments-box .fb_iframe_widget,
+.gcal-fb-comments-box .fb_iframe_widget span,
+.gcal-fb-comments-box .fb_iframe_widget iframe[style]  {width: 100% !important;}
 
 /* merge from joomla 3 */
 .list-striped,

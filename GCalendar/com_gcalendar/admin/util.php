@@ -444,6 +444,10 @@ class GCalendarUtil {
 			$document->addStyleSheet(JURI::root().'administrator/components/com_gcalendar/libraries/GCalendar/gcalendar.css');
 		}
 
+		if (isset($libraries['maps'])) {
+			$document->addScript((JBrowser::getInstance()->isSSLConnection() ? "https" : "http").'://maps.googleapis.com/maps/api/js?sensor=true&language='.self::getGoogleLanguage());
+		}
+
 		if (isset($libraries['fullcalendar'])) {
 			$document->addScript(JURI::root().'components/com_gcalendar/libraries/fullcalendar/fullcalendar.min.js');
 			$document->addStyleSheet(JURI::root().'components/com_gcalendar/libraries/fullcalendar/fullcalendar.css');
@@ -452,6 +456,18 @@ class GCalendarUtil {
 			$document->addStyleSheet(JURI::root().'components/com_gcalendar/libraries/jquery/ext/tipTip.css');
 			$document->addScript(JURI::root().'components/com_gcalendar/libraries/jquery/ext/jquery.tipTip.minified.js');
 		}
+	}
+
+	public static function getGoogleLanguage() {
+		$languages = array('ar', 'bg', 'bn', 'ca', 'cs', 'da', 'de', 'el', 'en', 'en-AU', 'en-GB', 'es', 'eu', 'fa', 'fi', 'fil', 'fr', 'gl', 'gu', 'hi', 'hr', 'hu', 'id', 'it', 'iw', 'ja', 'kn', 'ko', 'lt', 'lv', 'ml', 'mr', 'nl', 'nn', 'no', 'or', 'pl', 'pt', 'pt-BR', 'pt-PT', 'rm', 'ro', 'ru', 'sk', 'sl', 'sr', 'sv', 'tl', 'ta', 'te', 'th', 'tr', 'uk', 'vi','zh-CN', 'zh-TW');
+		$lang  = DPCalendarHelper::getFrLanguage();
+		if (!in_array($lang, $languages)) {
+			$lang = substr($lang, 0, strpos($lang, '-'));
+		}
+		if (!in_array($lang, $languages)) {
+			$lang = 'en';
+		}
+		return $lang;
 	}
 
 	public static function sendMessage($message, $error = false, array $data = array()) {
