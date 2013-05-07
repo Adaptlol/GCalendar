@@ -21,14 +21,9 @@
 
 defined('_JEXEC') or die();
 
-GCalendarUtil::loadLibrary();
+GCalendarUtil::loadLibrary(array('jquery' => true, 'fullcalendar' => true));
 
 $document = JFactory::getDocument();
-$document->addScript(JURI::base().'components/com_gcalendar/libraries/jquery/ui/jquery-ui.custom.min.js');
-$document->addScript(JURI::base(). 'components/com_gcalendar/libraries/fullcalendar/fullcalendar.min.js' );
-$document->addStyleSheet(JURI::base().'components/com_gcalendar/libraries/fullcalendar/fullcalendar.css');
-$document->addStyleSheet(JURI::base().'components/com_gcalendar/libraries/jquery/ext/tipTip.css');
-$document->addScript(JURI::base().'components/com_gcalendar/libraries/jquery/gcalendar/jquery.gcalendar-all.min.js');
 $document->addStyleSheet(JURI::base().'modules/mod_gcalendar/tmpl/gcalendar.css');
 
 $color = $params->get('event_color', '135CAE');
@@ -37,10 +32,8 @@ $cssClass = "gcal-module_event_gccal_".$module->id;
 $document->addStyleDeclaration(".".$cssClass.",.".$cssClass." a, .".$cssClass." div{background-color: ".$fadedColor." !important; border-color: #".$color."; color: ".$fadedColor.";} .fc-header-center{vertical-align: middle !important;} #gcalendar_module_".$module->id." .fc-state-default span, #gcalendar_module_".$module->id." .ui-state-default{padding:0px !important;}");
 
 $theme = $params->get('theme', GCalendarUtil::getComponentParameter('theme'));
-if(JRequest::getVar('theme', null) != null)
-$theme = JRequest::getVar('theme', null);
 if(!empty($theme))
-$document->addStyleSheet(JURI::base().'components/com_gcalendar/libraries/jquery/themes/'.$theme.'/jquery-ui.custom.css');
+	GCalendarUtil::loadLibrary(array('jqueryui' => $theme));
 
 $daysLong = "[";
 $daysShort = "[";
@@ -80,7 +73,7 @@ $ids = rtrim($ids,',');
 $calCode = "// <![CDATA[ \n";
 $calCode .= "gcjQuery(document).ready(function(){\n";
 $calCode .= "   gcjQuery('#gcalendar_module_".$module->id."').fullCalendar({\n";
-$calCode .= "		events: '".html_entity_decode(JRoute::_('index.php?option=com_gcalendar&view=jsonfeed&layout=module&format=raw&gcids='.$ids))."',\n";
+$calCode .= "		events: '".html_entity_decode(JRoute::_('index.php?option=com_gcalendar&view=jsonfeed&compact='.$params->get('compact_events', 1).'&format=raw&gcids='.$ids))."',\n";
 $calCode .= "       header: {\n";
 $calCode .= "				left: 'prev,next ',\n";
 $calCode .= "				center: 'title',\n";
@@ -109,7 +102,7 @@ $calCode .= "		    prevYear: '&nbsp;&lt;&lt;&nbsp;',\n"; // <<
 $calCode .= "		    nextYear: '&nbsp;&gt;&gt;&nbsp;'\n"; // >>
 $calCode .= "		},\n";
 $calCode .= "		eventRender: function(event, element) {\n";
-$calCode .= "			element.addClass('gcal-module_event_gccal_'+".$module->id.");\n";
+$calCode .= "			event.editable = false;\n";
 $calCode .= "			if (event.description){\n";
 $calCode .= "				element.tipTip({content: event.description, defaultPosition: 'top'});}\n";
 $calCode .= "		},\n";

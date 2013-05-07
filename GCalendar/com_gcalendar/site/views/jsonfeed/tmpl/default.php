@@ -67,13 +67,12 @@ if (!empty($this->calendars)) {
 			$eventData = array(
 					'id' => $event->getGCalId(),
 					'gcid' => $event->getParam('gcid'),
-					'title' => htmlspecialchars_decode($event->getTitle()),
+					'title' => $this->compactMode == 0 ? htmlspecialchars_decode($event->getTitle()) : utf8_encode(chr(160)),
 					'start' => $event->getStartDate()->format('c', true),
 					'end' => $event->getEndDate()->format('c', true),
 					'url' => JRoute::_('index.php?option=com_gcalendar&view=event&eventID='.$event->getGCalId().'&gcid='.$event->getParam('gcid').(empty($itemID)?'':$itemID)),
-					'className' => "gcal-event_gccal_".$event->getParam('gcid'),
 					'color' => GCalendarUtil::getFadedColor($event->getParam('gccolor')),
-					'allDay' => $event->isAllDay(),
+					'allDay' => $this->compactMode == 0 ? $event->isAllDay() : true,
 					'description' => $description
 			);
 

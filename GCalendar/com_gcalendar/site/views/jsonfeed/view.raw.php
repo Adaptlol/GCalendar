@@ -37,6 +37,12 @@ class GCalendarViewJSONFeed extends JViewLegacy {
 			$calendars = array();
 		}
 		$this->calendars = $calendars;
+
+		$this->compactMode = JRequest::getVar('compact', 0);
+		if ($this->compactMode == 1) {
+			$this->setLayout('module');
+		}
+
 		parent::display($tpl);
 	}
 }

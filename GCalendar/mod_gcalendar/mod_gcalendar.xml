@@ -24,6 +24,12 @@
 			<fieldset name="basic">
 				<field name="calendarids" type="gcalendar" default="" multiple="true"
 					label="MOD_GCALENDAR_FIELD_CALENDAR_IDS_LABEL" description="MOD_GCALENDAR_FIELD_CALENDAR_IDS_DESC" />
+				<field name="compact_events" type="list" default="2" class="btn-group" 
+					label="MOD_GCALENDAR_FIELD_COMPACT_LABEL" description="MOD_GCALENDAR_FIELD_COMPACT_DESC">
+					<option value="1">JYES</option>
+					<option value="2">MOD_GCALENDAR_FIELD_COMPACT_SINGLE</option>
+					<option value="0">JNO</option>
+				</field>
 				<field name="weekstart" type="list" default="1" label="MOD_GCALENDAR_FIELD_WEEK_START_LABEL"
 					description="MOD_GCALENDAR_FIELD_WEEK_START_DESC">
 					<option value="0">MOD_GCALENDAR_FIELD_WEEK_START_SUNDAY</option>
