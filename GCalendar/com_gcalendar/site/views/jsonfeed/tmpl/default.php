@@ -72,6 +72,7 @@ if (!empty($this->calendars)) {
 					'end' => $event->getEndDate()->format('c', true),
 					'url' => JRoute::_('index.php?option=com_gcalendar&view=event&eventID='.$event->getGCalId().'&gcid='.$event->getParam('gcid').(empty($itemID)?'':$itemID)),
 					'className' => "gcal-event_gccal_".$event->getParam('gcid'),
+					'color' => GCalendarUtil::getFadedColor($event->getParam('gccolor')),
 					'allDay' => $event->isAllDay(),
 					'description' => $description
 			);
