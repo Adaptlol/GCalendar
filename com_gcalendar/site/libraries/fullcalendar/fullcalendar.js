@@ -1021,7 +1021,7 @@ function EventManager(options, _sources) {
 					data[startParam] = Math.round(+(rangeStart.getTime() - rangeStart.getTimezoneOffset()*60*1000) / 1000);
 				}
 				if (endParam) {
-					data[endParam] = Math.round(+(rangeEnd.getTime() - rangeStart.getTimezoneOffset()*60*1000) / 1000);
+					data[endParam] = Math.round(+(rangeEnd.getTime() - rangeEnd.getTimezoneOffset()*60*1000) / 1000);
 				}
 				pushLoading();
 				$.ajax($.extend({}, ajaxDefaults, source, {
