@@ -26,6 +26,7 @@ class GCalendarView extends JViewLegacy {
 	protected $state;
 	protected $params;
 	protected $adapt = true;
+	protected $defaultPageTitle = 'COM_GCALENDAR_DEFAULT_PAGE_TITLE';
 
 	public function display($tpl = null) {
 		if ($this->adapt) {
@@ -67,7 +68,7 @@ class GCalendarView extends JViewLegacy {
 		if ($menu) {
 			$this->params->def('page_heading', $this->params->get('page_title', $menu->title));
 		} else {
-			$this->params->def('page_heading', JText::_('COM_GCALENDAR_DEFAULT_PAGE_TITLE'));
+			$this->params->def('page_heading', JText::_($this->defaultPageTitle));
 		}
 		$title = $this->params->get('page_title', '');
 		if (empty($title)) {
