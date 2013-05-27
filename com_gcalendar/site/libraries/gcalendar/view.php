@@ -25,19 +25,9 @@ class GCalendarView extends JViewLegacy {
 
 	protected $state;
 	protected $params;
-	protected $adapt = true;
 	protected $defaultPageTitle = 'COM_GCALENDAR_DEFAULT_PAGE_TITLE';
 
 	public function display($tpl = null) {
-		if ($this->adapt) {
-			if (GCalendarUtil::isJoomlaVersion('2.5')) {
-				$this->setLayout($this->getLayout().'_25');
-			}
-			if (GCalendarUtil::isJoomlaVersion('3')) {
-				$this->setLayout($this->getLayout().'_3');
-			}
-		}
-
 		$state = $this->get('State');
 
 		$tmp = clone $state->params;

@@ -28,6 +28,10 @@ class Com_GCalendarInstallerScript{
 
 	function update($parent) {
 		$version = $this->getParam('version');
+		if (empty($version)) {
+			return;
+		}
+
 		if (version_compare($version, '2.6.0') == -1) {
 			$this->run("ALTER TABLE `#__gcalendar` ADD `access` TINYINT UNSIGNED NOT NULL DEFAULT '1';");
 			$this->run("ALTER TABLE `#__gcalendar` ADD `access_content` TINYINT UNSIGNED NOT NULL DEFAULT '1';");
