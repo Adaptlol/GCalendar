@@ -28,11 +28,6 @@ $event = $this->event;
 $config = array('unique_id' => $event->getGCalId());
 $v = new vcalendar( $config );
 $v->prodid = 'GCalendar';
-$path = JPATH_ADMINISTRATOR.DS.'components'.DS.'com_gcalendar'.DS.'gcalendar.xml';
-if(file_exists($path)) {
-	$manifest = simplexml_load_file($path);
-	$v->version = $manifest->version;
-}
 
 $tz = 'UTC';
 $v->setProperty( 'method', 'PUBLISH' );
