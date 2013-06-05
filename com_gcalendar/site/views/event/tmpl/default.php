@@ -88,4 +88,4 @@ $dispatcher->trigger('onAfterDisplayEvent', array($this->event,  &$content, &$pl
 echo GCalendarUtil::renderEvents(array($this->event), $content, JFactory::getApplication()->getParams(), $plugins);
 
 if(!JFile::exists(JPATH_ADMINISTRATOR.DS.'components'.DS.'com_gcalendarap'.DS.'gcalendarap.php'))
-	echo "<div style=\"text-align:center;margin-top:10px\" ><a href=\"http://g4j.digital-peak.com\">GCalendar</a></div>\n";
+	echo "<div style=\"text-align:center;margin-top:10px\">GCalendar <a href=\"http://g4j.digital-peak.com\"><img src=\"media/com_gcalendar/images/information.png\" height=\"15px\" alt=\"information\"></img></a></div>\n";
