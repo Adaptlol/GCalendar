@@ -9,9 +9,9 @@ gcjQuery(document).ready(function() {
 		var printWindow = window.open(loc);
 		printWindow.focus();
 	});
-	gcjQuery('#gc_gcalendar_view_toggle_status').bind('click', function(e) {
+	gcjQuery('#gcalendar_view_toggle_status').bind('click', function(e) {
 		gcjQuery('#gcalendar_view_list').slideToggle('slow', function(){
-			var oldImage = gcjQuery('#gc_gcalendar_view_toggle_status').attr('src');
+			var oldImage = gcjQuery('#gcalendar_view_toggle_status').attr('src');
 			var gcalImage = oldImage;
 			var path = oldImage.substring(0, oldImage.lastIndexOf('/'));
 			
@@ -20,7 +20,7 @@ gcjQuery(document).ready(function() {
 			else
 				gcalImage = path + '/up.png';
 			
-			gcjQuery('#gc_gcalendar_view_toggle_status').attr('src', gcalImage);
+			gcjQuery('#gcalendar_view_toggle_status').attr('src', gcalImage);
 		});
 	});
 });

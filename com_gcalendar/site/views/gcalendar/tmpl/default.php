@@ -279,14 +279,15 @@ $calCode .= "var dayClickCustom = function(date, allDay, jsEvent, view){gcjQuery
 $calCode .= "var eventDropCustom = function(event, dayDelta, minuteDelta, allDay, revertFunc, jsEvent, ui, view){};\n";
 $calCode .= "var eventResizeCustom = function(event, dayDelta, minuteDelta, revertFunc, jsEvent, ui, view){};\n";
 $calCode .= "// ]]>\n";
-$document->addScriptDeclaration($calCode);?>
+$document->addScriptDeclaration($calCode);
+?>
 
 <div class="dp-container">
 
 <?php
 echo JHTML::_('content.prepare', $params->get('textbefore'));
 if($params->get('show_selection', 1) == 1 || $params->get('show_selection', 1) == 3){?>
-<dl id="gccalendar_view_list">
+<dl id="gcalendar_view_list">
 <?php foreach($allCalendars as $calendar) {
 		$value = html_entity_decode(JRoute::_('index.php?option=com_gcalendar&view=jsonfeed&format=raw&gcid='.$calendar->id));
 		$checked = '';
@@ -321,5 +322,5 @@ $dispatcher = JDispatcher::getInstance();
 JPluginHelper::importPlugin('gcalendar');
 $dispatcher->trigger('onGCCalendarLoad', array('gcalendar_component'));
 
-if(!JFile::exists(JPATH_ADMINISTRATOR.DS.'components'.DS.'com_gcalendarap'.DS.'gcalendarap.php'))
-	echo "<div style=\"text-align:center;margin-top:10px\">GCalendar <a href=\"http://g4j.digital-peak.com\"><img src=\"media/com_gcalendar/images/information.png\" height=\"15px\" alt=\"information\"></img></a></div>\n";
+if (!JFile::exists(JPATH_ADMINISTRATOR.DS.'components'.DS.'com_gcalendarap'.DS.'gcalendarap.php'))
+	echo "<div style=\"text-align:center;margin-top:10px\" ><a href=\"http://g4j.digital-peak.com\">GCalendar</a></div>\n";

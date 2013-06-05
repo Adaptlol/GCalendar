@@ -213,7 +213,7 @@ class GCalendarUtil {
 				$variables['description'] = nl2br(preg_replace("@(((f|ht)tp:\/\/)[^\"\'\>\s]+)@",'<a href="\\1" target="_blank">\\1</a>', $variables['description']));
 			}
 			if ($params->get('description_length', 0) > 0) {
-				$variables['description'] = DPCalendarHelper::truncateHtml($variables['description'], $params->get('description_length', 0));
+				$variables['description'] = self::truncateHtml($variables['description'], $params->get('description_length', 0));
 			}
 
 			$variables['hasAuthor'] = count($event->getAuthor()) > 0;
@@ -464,7 +464,7 @@ class GCalendarUtil {
 
 	public static function getGoogleLanguage() {
 		$languages = array('ar', 'bg', 'bn', 'ca', 'cs', 'da', 'de', 'el', 'en', 'en-AU', 'en-GB', 'es', 'eu', 'fa', 'fi', 'fil', 'fr', 'gl', 'gu', 'hi', 'hr', 'hu', 'id', 'it', 'iw', 'ja', 'kn', 'ko', 'lt', 'lv', 'ml', 'mr', 'nl', 'nn', 'no', 'or', 'pl', 'pt', 'pt-BR', 'pt-PT', 'rm', 'ro', 'ru', 'sk', 'sl', 'sr', 'sv', 'tl', 'ta', 'te', 'th', 'tr', 'uk', 'vi','zh-CN', 'zh-TW');
-		$lang  = DPCalendarHelper::getFrLanguage();
+		$lang  = self::getFrLanguage();
 		if (!in_array($lang, $languages)) {
 			$lang = substr($lang, 0, strpos($lang, '-'));
 		}

@@ -11,7 +11,7 @@
 	float: left;
 }
 
-#gccalendar_component_date_picker_button,#gccalendar_component_print_button
+#gcalendar_component_date_picker_button,#gcalendar_component_print_button
 	{
 	cursor: pointer;
 }
@@ -32,7 +32,7 @@
 	margin-top: 5px;
 }
 
-#gccalendar_view_toggle_status {
+#gcalendar_view_toggle_status {
 	cursor: pointer;
 	text-align: center;
 }
