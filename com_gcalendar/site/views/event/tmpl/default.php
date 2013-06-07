@@ -43,19 +43,19 @@ $content = '{{#events}}
 	<div class="span7">
 		<div class="row-fluid">
 			<div class="span3 event-label">{{titleLabel}}: </div>
-			<div class="span9">{{title}}</div>
+			<div class="span9 event-content">{{title}}</div>
 		</div>
 		<div class="row-fluid">
 			<div class="span3 event-label">{{calendarNameLabel}}: </div>
-			<div class="span9">{{#calendarLink}}<a href="{{calendarLink}}">{{calendarName}}</a>{{/calendarLink}}{{^calendarLink}}{{calendarName}}{{/calendarLink}}</div>
+			<div class="span9 event-content">{{#calendarLink}}<a href="{{calendarLink}}">{{calendarName}}</a>{{/calendarLink}}{{^calendarLink}}{{calendarName}}{{/calendarLink}}</div>
 		</div>
 		<div class="row-fluid">
 			<div class="span3 event-label">{{dateLabel}}: </div>
-			<div class="span9">{{date}}</div>
+			<div class="span9 event-content">{{date}}</div>
 		</div>
 		<div class="row-fluid">
 			<div class="span3 event-label">{{locationLabel}}: </div>
-			<div class="span9">{{#location}}<a href="http://maps.google.com/?q={{location}}" target="_blank" id="gc-event-details-location">{{location}}</a>{{/location}}</div>
+			<div class="span9 event-content">{{#location}}<a href="http://maps.google.com/?q={{location}}" target="_blank" id="gc-event-details-location">{{location}}</a>{{/location}}</div>
 		</div>
 		<div class="row-fluid">
 			<div class="span3 event-label">{{copyLabel}}: </div>
@@ -63,7 +63,7 @@ $content = '{{#events}}
 		</div>
 		<div class="row-fluid">
 			<div class="span3 event-label"></div>
-			<div class="span9"><a target="_blank" href="{{copyOutlookUrl}}">{{copyOutlookLabel}}</a></div>
+			<div class="span9 event-content"><a target="_blank" href="{{copyOutlookUrl}}">{{copyOutlookLabel}}</a></div>
 		</div>
 	</div>
 	<div class="span5">{{#maplink}}<div id="gc-event-details-map" class="pull-right gcalendar-fixed-map" data-zoom="4"></div>{{/maplink}}</div>

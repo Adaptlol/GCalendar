@@ -474,6 +474,41 @@ class GCalendarUtil {
 		return $lang;
 	}
 
+	public static function getDate($date = null, $allDay = null, $tz = null) {
+		$dateObj = JFactory::getDate($date, $tz);
+
+		if (!$allDay) {
+			$dateObj->setTimezone(new DateTimeZone(self::getComponentParameter('timezone', 'UTC')));
+		}
+		return $dateObj;
+	}
+
+	public static function getDateFromString($date, $time, $allDay, $timezone, $dateFormat = null, $timeFormat = null) {
+		$string = $date;
+		if (!empty($time)) {
+			$string = $date.($allDay ? '' : ' '.$time);
+		}
+
+		$months = array('JANUARY', 'FEBRUARY', 'MARCH', 'APRIL', 'MAY', 'JUNE', 'JULY', 'AUGUST', 'SEPTEMBER', 'OCTOBER', 'NOVEMBER', 'DECEMBER');
+		$monthsShort = array('JANUARY_SHORT', 'FEBRUARY_SHORT', 'MARCH_SHORT', 'APRIL_SHORT', 'MAY_SHORT', 'JUNE_SHORT', 'JULY_SHORT', 'AUGUST_SHORT', 'SEPTEMBER_SHORT', 'OCTOBER_SHORT', 'NOVEMBER_SHORT', 'DECEMBER_SHORT');
+		$lang = JLanguage::getInstance('en-GB');
+		foreach (array_merge($months, $monthsShort) as $month) {
+			$string = str_replace(JText::_($month), $lang->_($month), $string);
+		}
+
+		if (empty($dateFormat)) {
+			$dateFormat = self::getComponentParameter('event_date_format', 'Y-m-d');
+		}
+		if (empty($timeFormat)) {
+			$timeFormat = self::getComponentParameter('event_time_format', 'g:i a');
+		}
+
+		$date = DateTime::createFromFormat($dateFormat.($allDay ? '' : ' '.$timeFormat), $string, new DateTimeZone($timezone));
+		$date = GCalendarUtil::getDate($date->format('U'), $allDay);
+
+		return $date;
+	}
+
 	public static function sendMessage($message, $error = false, array $data = array()) {
 		ob_clean();
 
