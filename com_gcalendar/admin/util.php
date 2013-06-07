@@ -475,6 +475,9 @@ class GCalendarUtil {
 	}
 
 	public static function getDate($date = null, $allDay = null, $tz = null) {
+		if (empty($tz)) {
+			$tz =  GCalendarUtil::getComponentParameter('timezone');
+		}
 		$dateObj = JFactory::getDate($date, $tz);
 
 		if (!$allDay) {
