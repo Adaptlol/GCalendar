@@ -19,4 +19,8 @@
 		<file id="plg_search_gcalendar" type="plugin" group="search" client="site">plg_search_gcalendar.zip</file>
 		<file id="plg_gcalendar_next" type="plugin" group="content" client="site">plg_gcalendar_next.zip</file>
 	</files>
+	
+	<updateservers>
+		<server type="extension" priority="1" name="GCalendar Update Site"><![CDATA[http://g4j.digital-peak.com/index.php?option=com_ars&view=update&task=stream&format=xml&id=1&ext=extension.xml]]></server>
+	</updateservers>
 </extension>
