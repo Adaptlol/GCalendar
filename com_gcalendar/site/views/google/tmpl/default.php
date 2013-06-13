@@ -39,10 +39,6 @@ if (is_array($items)){
 	}
 }
 $params = $this->params;
-
-if (!JFile::exists(JPATH_ADMINISTRATOR.DS.'components'.DS.'com_gcalendarap'.DS.'gcalendarap.php'))
-	echo "<div style=\"float:right;margin-bottom:10px\"><a href=\"http://g4j.digital-peak.com\"><img src=\"media/com_gcalendar/images/information.png\" height=\"15px\" alt=\"information\"></img></a></div>\n";
-
 ?>
 
 <div class="contentpane<?php echo $params->get( 'pageclass_sfx' ); ?>"><?php

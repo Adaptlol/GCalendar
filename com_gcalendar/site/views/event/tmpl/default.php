@@ -85,9 +85,6 @@ $plugins['pluginsAfter'] = array();
 $dispatcher->trigger('onBeforeDisplayEvent', array($this->event,  &$content, &$plugins['pluginsBefore']));
 $dispatcher->trigger('onAfterDisplayEvent', array($this->event,  &$content, &$plugins['pluginsAfter']));
 
-if(!JFile::exists(JPATH_ADMINISTRATOR.DS.'components'.DS.'com_gcalendarap'.DS.'gcalendarap.php'))
-	echo "<div style=\"float:right;margin-bottom:5px\"><a href=\"http://g4j.digital-peak.com\"><img src=\"media/com_gcalendar/images/information.png\" height=\"15px\" alt=\"information\"></img></a></div>\n";
-
 echo GCalendarUtil::renderEvents(array($this->event), $content, JFactory::getApplication()->getParams(), $plugins);
 
 if(!JFile::exists(JPATH_ADMINISTRATOR.DS.'components'.DS.'com_gcalendarap'.DS.'gcalendarap.php'))
