@@ -230,11 +230,11 @@ $calCode .= "			'<span class=\"fc-button-inner\"><span class=\"fc-button-content
 $calCode .= "			'<input type=\"hidden\" id=\"gcalendar_component_date_picker\" value=\"\">'+\n";
 $calCode .= "			'<i class=\"icon-calendar\" title=\"".JText::_('COM_GCALENDAR_GCALENDAR_VIEW_SHOW_DATEPICKER')."\"></i>'+\n";
 $calCode .= "			'</span></span></span></span>';\n";
-$calCode .= "		custom_buttons +='<span class=\"fc-button fc-button-print ".$class."-state-default ".$class."-corner-left ".$class."-corner-right\">'+\n";
+$calCode .= "		custom_buttons +='<span class=\"hidden-phone fc-button fc-button-print ".$class."-state-default ".$class."-corner-left ".$class."-corner-right\">'+\n";
 $calCode .= "			'<span class=\"fc-button-inner\"><span class=\"fc-button-content\" id=\"gcalendar_component_print_button\">'+\n";
 $calCode .= "			'<i class=\"icon-print\" title=\"".JText::_('COM_GCALENDAR_GCALENDAR_VIEW_TOOLBAR_PRINT')."\"></i>'+\n";
 $calCode .= "			'</span></span></span></span>';\n";
-$calCode .= "	if (gcjQuery(document).width() > 500) {gcjQuery('span.fc-header-space').after(custom_buttons);}\n";
+$calCode .= "	gcjQuery('span.fc-header-space').after(custom_buttons);\n";
 $calCode .= "	if (gcjQuery('table').disableSelection) gcjQuery('div.fc-header-space').closest('table.fc-header').disableSelection();\n";
 $calCode .= "	gcjQuery(\"#gcalendar_component_date_picker\").datepicker({\n";
 $calCode .= "		dateFormat: 'dd-mm-yy',\n";

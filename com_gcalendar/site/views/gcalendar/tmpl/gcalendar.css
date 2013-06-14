@@ -36,3 +36,11 @@
 	cursor: pointer;
 	text-align: center;
 }
+
+@media only screen and (max-width : 600px){
+    #gcalendar_component .fc-header td {
+        width: 100%;
+        display: block;
+        text-align:left;
+    }
+}
