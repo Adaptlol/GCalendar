@@ -114,7 +114,7 @@ $calCode .= "		year: tmpYear,\n";
 $calCode .= "		month: tmpMonth,\n";
 $calCode .= "		date: tmpDay,\n";
 $calCode .= "		defaultView: tmpView,\n";
-$calCode .= "		weekNumbers: ".($params->get('week_numbers', 1)==1?'true':'false').",\n";
+$calCode .= "		weekNumbers: ".($params->get('week_numbers', 0)==1?'true':'false').",\n";
 $calCode .= "		weekNumberTitle: '',\n";
 $calCode .= "		editable: false, theme: ".(!empty($theme)?'true':'false').",\n";
 $calCode .= "		weekends: ".($params->get('weekend', 1)==1?'true':'false').",\n";

@@ -19,7 +19,7 @@
 			label="COM_GCALENDAR_FIELD_CONFIG_SETTINGS_CACHING_TIME" description="COM_GCALENDAR_FIELD_CONFIG_SETTINGS_CACHING_TIME_DESC" />
 	</fieldset>
 	<fieldset name="calendar" label="COM_GCALENDAR_FIELD_CONFIG_CALENDAR_LABEL">
-		<field name="show_selection" type="radio" default="1"
+		<field name="show_selection" type="list" default="1"
 			label="COM_GCALENDAR_FIELD_CONFIG_CALENDAR_SHOW_CALENDARS_LABEL" description="COM_GCALENDAR_FIELD_CONFIG_CALENDAR_SHOW_CALENDARS_DESC">
 			<option value="1">JYES</option>
 			<option value="3">COM_GCALENDAR_FIELD_CONFIG_CALENDAR_SHOW_CALENDARS_EXPAND</option>
