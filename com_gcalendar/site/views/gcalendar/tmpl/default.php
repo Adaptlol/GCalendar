@@ -318,6 +318,8 @@ if($params->get('show_selection', 1) == 3) $image = JURI::base().'media/com_gcal
 <div id='gcalendar_component_popup' style="visibility:hidden" ></div>
 </div>
 <?php
+echo JHTML::_('content.prepare', $params->get('textafter'));
+
 $dispatcher = JDispatcher::getInstance();
 JPluginHelper::importPlugin('gcalendar');
 $dispatcher->trigger('onGCCalendarLoad', array('gcalendar_component'));
