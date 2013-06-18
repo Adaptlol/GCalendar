@@ -65,38 +65,8 @@ GCalendarUtil::loadLibrary();
     </div>
 </div>
 </div>
-<div id="twitter_div" style="float:left"></div>
-<script src="<?php echo JBrowser::getInstance()->isSSLConnection() ? 'https' : 'http'?>://widgets.twimg.com/j/2/widget.js"></script>
-<script>
-gcjQuery(document).ready(function() {
-	new TWTR.Widget({
-		  id: 'twitter_div',
-		  version: 2,
-		  type: 'profile',
-		  rpp: 4,
-		  interval: 30000,
-		  width: 300,
-		  height: 300,
-		  theme: {
-		    shell: {
-		      background: '#CCCCCC',
-		      color: '#000000'
-		    },
-		    tweets: {
-		      background: '#FFFFFF',
-		      color: '#000000',
-		      links: '#0726eb'
-		    }
-		  },
-		  features: {
-		    scrollbar: true,
-		    loop: true,
-		    live: true,
-		    behavior: 'all'
-		  }
-	}).render().setUser('digitpeak').start();
-});
-</script>
+<a class="twitter-timeline" href="https://twitter.com/digitpeak" data-widget-id="346951058737750017">Tweets by @digitpeak</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
 
 <div align="center" style="clear: both">
 	<br>
