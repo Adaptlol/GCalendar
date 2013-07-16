@@ -444,8 +444,8 @@ class GCalendarUtil {
 		}
 
 		if (isset($libraries['gcalendar'])) {
-			$document->addScript(JURI::root().'administrator/components/com_gcalendar/libraries/GCalendar/gcalendar.js');
-			$document->addStyleSheet(JURI::root().'administrator/components/com_gcalendar/libraries/GCalendar/gcalendar.css');
+			$document->addScript(JURI::root().'components/com_gcalendar/libraries/GCalendar/gcalendar.js');
+			$document->addStyleSheet(JURI::root().'components/com_gcalendar/libraries/GCalendar/gcalendar.css');
 		}
 
 		if (isset($libraries['maps'])) {
