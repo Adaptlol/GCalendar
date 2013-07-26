@@ -21,7 +21,7 @@
 
 defined('_JEXEC') or die();
 
-GCalendarUtil::loadLibrary();
+JFactory::getDocument()->addStyleSheet('components/com_gcalendar/views/cpanel/tmpl/default.css');
 ?>
 <div style="width:500px;">
 <h2><?php echo JText::_('COM_GCALENDAR_VIEW_CPANEL_WELCOME'); ?></h2>
