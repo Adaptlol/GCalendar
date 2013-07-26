@@ -25,7 +25,7 @@ JLoader::import('joomla.application.component.view');
 
 JLoader::import('components.com_gcalendar.libraries.fullcalendar.fullcalendar', JPATH_BASE);
 
-class GCalendarViewGCalendar extends JViewLegacy {
+class GCalendarViewGcalendar extends JViewLegacy {
 
 	public function display($tpl = null) {
 		$calendars = $this->get('DBCalendars');

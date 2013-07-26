@@ -23,7 +23,7 @@ defined('_JEXEC') or die();
 
 JLoader::import( 'joomla.application.component.view' );
 
-class GCalendarViewCPanel extends JViewLegacy {
+class GCalendarViewCpanel extends JViewLegacy {
 
 	public function display($tpl = null) {
 		JToolBarHelper::title(JText::_('COM_GCALENDAR'), 'calendar');
