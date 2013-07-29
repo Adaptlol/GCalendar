@@ -21,6 +21,8 @@
 
 defined('_JEXEC') or die();
 
+JLoader::import('joomla.filesystem.file');
+
 class GCalendarZendHelper {
 
 	const SORT_ORDER_ASC = 'ascending';
