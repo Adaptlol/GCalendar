@@ -26,6 +26,11 @@ JLoader::import( 'joomla.application.component.view');
 class GCalendarViewJSONFeed extends JView {
 
 	public function display($tpl = null) {
+	    $start = GCalendarUtil::getDate(JRequest::getInt('start'));
+	    JRequest::setVar('start', $start->format('U') - $start->getTimezone()->getOffset($start));
+	    $end = GCalendarUtil::getDate(JRequest::getInt('end'));
+	    JRequest::setVar('end', $end->format('U') - $end->getTimezone()->getOffset($end));
+
 		parent::display($tpl);
 	}
 }
