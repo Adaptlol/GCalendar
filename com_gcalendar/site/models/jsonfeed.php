@@ -26,8 +26,8 @@ JLoader::import( 'joomla.application.component.model' );
 class GCalendarModelJSONFeed extends JModelLegacy {
 
 	public function getGoogleCalendarFeeds() {
-		$startDate = JRequest::getVar('start', null);
-		$endDate = JRequest::getVar('end', null);
+		$startDate = JRequest::getVar('start', null, 'GET');
+		$endDate = JRequest::getVar('end', null, 'GET');
 
 		$calendarids = '';
 		if (JRequest::getVar('gcids', null) != null) {

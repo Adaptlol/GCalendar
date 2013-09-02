@@ -27,9 +27,9 @@ class GCalendarViewJSONFeed extends JViewLegacy {
 
 	public function display($tpl = null) {
 		$tz = new DateTimeZone(GCalendarUtil::getComponentParameter('timezone', 'UTC'));
-		$start = JFactory::getDate(JRequest::getInt('start'), $tz);
+		$start = JFactory::getDate(JRequest::getInt('start', 0, 'GET'), $tz);
 		JRequest::setVar('start', $start->format('U') - $tz->getOffset($start));
-		$end = JFactory::getDate(JRequest::getInt('end'), $tz);
+		$end = JFactory::getDate(JRequest::getInt('end', 0, 'GET'), $tz);
 		JRequest::setVar('end', $end->format('U') - $tz->getOffset($end));
 
 		$calendars = $this->get('GoogleCalendarFeeds');
