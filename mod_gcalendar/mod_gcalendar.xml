@@ -2,14 +2,14 @@
 <extension type="module" version="2.5" method="upgrade" client="site">
 	<name>MOD_GCALENDAR</name>
 	<author>G4J Project</author>
-	<creationDate>Aug 2013</creationDate>
+	<creationDate>Sep 2013</creationDate>
 	<copyright>This extension is released under the GNU/GPL License.
 	</copyright>
 	<license>http://www.gnu.org/copyleft/gpl.html
 		GNU/GPL</license>
 	<authorEmail>info@digital-peak.com</authorEmail>
 	<authorUrl>g4j.digital-peak.com</authorUrl>
-	<version>3.1.4</version>
+	<version>3.1.5</version>
 	<description>MOD_GCALENDAR_XML_DESCRIPTION</description>
 	<files>
 		<filename module="mod_gcalendar">mod_gcalendar.php

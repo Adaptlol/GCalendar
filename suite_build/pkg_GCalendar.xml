@@ -4,13 +4,13 @@
 	<packager>Allon Moritz</packager>
 	<name>GCalendar</name>
 	<author>G4J Project</author>
-	<creationDate>Aug 2013</creationDate>
+	<creationDate>Sep 2013</creationDate>
 	<copyright>This extension is released under the GNU/GPL License.</copyright>
 	<license>http://www.gnu.org/copyleft/gpl.html
 		GNU/GPL</license>
 	<authorEmail>info@digital-peak.com</authorEmail>
 	<authorUrl>g4j.digital-peak.com</authorUrl>
-	<version>3.1.4</version>
+	<version>3.1.5</version>
 	<files>
 		<file id="com_gcalendar" type="component">com_gcalendar.zip</file>
 		<file id="mod_gcalendar" type="module" client="site">mod_gcalendar.zip</file>
